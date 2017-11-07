@@ -1,9 +1,15 @@
 var browser;
 
-//add JS functionality to button 'Submit'
+//add JS functionality to buttons 'Submit' and 'Clear'
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("submit").addEventListener("click", submitHandler);
 });
+
+//add JS functionality to buttons 'Submit' and 'Clear'
+document.addEventListener('DOMContentLoaded', function() {
+	document.getElementById("clear").addEventListener("click", clearHandler);
+});
+
 
 // Detects Browser
 function detectBrowser() { 
@@ -51,23 +57,32 @@ function onReddit(){
 
 //sets user area based on previous login details
 function setUserArea() {
+	clearHandler()
 	//if stored user exists
-		//setExists()
 	//else
-		setFresh()
+		//setFresh()
 }
-
-function setFresh() {
-	document.getElementById("userArea").innerHTML="Username:<br>"
-	+"<input type=\"text\" name=\"username\"><br>"
-	+"Password:<br>"
-	+"<input type=\"password\" name=\"password\">"
-	+"<button id=\"submit\">Submit</button>"; 
+function toggleDisplay(div1, div2) {
+	document.getElementById(div1).style.display = 'block';
+	document.getElementById(div2).style.display = 'none';
+	
 }
 
 //submit login details
 function submitHandler() {
-	alert("Hello");
+	toggleDisplay('userAreaExist', 'userAreaNew');
+	
+}
+
+function clearHandler() {
+	toggleDisplay('userAreaNew', 'userAreaExist');
+	
+	//clear user
+	
+	//refresh panel
+	
+	
+	
 }
 
 //Helper Function to set text
