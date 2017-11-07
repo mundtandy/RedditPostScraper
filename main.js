@@ -57,19 +57,20 @@ function onReddit(){
 
 //sets user area based on previous login details
 function setUserArea() {
+	//user doesn't exist
 	clearHandler()
 	//if stored user exists
 	//else
 		//setFresh()
 }
-function toggleDisplay(div1, div2) {
-	document.getElementById(div1).style.display = 'block';
-	document.getElementById(div2).style.display = 'none';
-	
-}
+
+
 
 //submit login details
 function submitHandler() {
+	document.getElementById('username').value = "";
+    document.getElementById('password').value = "";
+	
 	toggleDisplay('userAreaExist', 'userAreaNew');
 	
 }
@@ -88,6 +89,12 @@ function clearHandler() {
 //Helper Function to set text
 function setText(ele, toChange){
 	document.getElementById(ele).innerHTML += toChange;
+}
+
+//Helper Function to toggle between login/user div
+function toggleDisplay(div1, div2) {
+	document.getElementById(div1).style.display = 'block';
+	document.getElementById(div2).style.display = 'none';	
 }
 
 browser = detectBrowser()
