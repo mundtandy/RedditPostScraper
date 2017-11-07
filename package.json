@@ -1,0 +1,23 @@
+{
+  "name": "redditpostscraper",
+  "version": "1.0.0",
+  "description": "Browser Extension to facilitiate ezpz calls to the reddit api to gather data about specific reddit post",
+  "main": "main.js",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mundtandy/RedditPostScraper.git"
+  },
+  "author": "Andy Mundt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mundtandy/RedditPostScraper/issues"
+  },
+  "homepage": "https://github.com/mundtandy/RedditPostScraper#readme"
+}
