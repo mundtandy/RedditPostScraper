@@ -3,12 +3,9 @@ var browser;
 //add JS functionality to buttons 'Submit' and 'Clear'
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("submit").addEventListener("click", submitHandler);
-});
-
-//add JS functionality to buttons 'Submit' and 'Clear'
-document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("clear").addEventListener("click", clearHandler);
 });
+
 
 
 // Detects Browser
@@ -68,22 +65,21 @@ function setUserArea() {
 
 //submit login details
 function submitHandler() {
+	//store user info
+	
+	
+	
 	document.getElementById('username').value = "";
     document.getElementById('password').value = "";
 	
 	toggleDisplay('userAreaExist', 'userAreaNew');
-	
 }
 
 function clearHandler() {
-	toggleDisplay('userAreaNew', 'userAreaExist');
-	
 	//clear user
 	
-	//refresh panel
 	
-	
-	
+	toggleDisplay('userAreaNew', 'userAreaExist');
 }
 
 //Helper Function to set text
