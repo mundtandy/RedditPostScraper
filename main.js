@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 // Detects Browser
 function detectBrowser() { 
 	if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
@@ -65,14 +64,24 @@ function setUserArea() {
 
 //submit login details
 function submitHandler() {
-	//store user info
-	
-	
-	
-	document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
-	
-	toggleDisplay('userAreaExist', 'userAreaNew');
+	if(document.getElementById('username').value.trim() == '' || document.getElementById('password').value.trim() == ''){
+		alert("Please ensure both fields are filled correctly")
+	} else {
+		//encrypt login
+		//var eu = CryptoJS.AES.encrypt(document.getElementById('username').value.trim(), 'firstlock');
+		//var ep = CryptoJS.AES.encrypt(document.getElementById('password').value.trim(), 'firstlock');
+		//var ek = CryptoJS.AES.encrypt('firstlock', 'secondlock');
+		
+		
+		//store user info
+		
+		
+		
+		document.getElementById('username').value = "";
+		document.getElementById('password').value = "";
+		
+		toggleDisplay('userAreaExist', 'userAreaNew');
+	}
 }
 
 function clearHandler() {
