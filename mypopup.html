@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
-<body>
-	<div class="popupContainerDiv">
-		<p id="browser">Using: </p>
-		<p id="website">Using Reddit: </p>
-			
-		Username:<br>
-		<input type="text" name="username"><br>
-		Password:<br>
-		<input type="password" name="password">
-		<button id="submit">Submit</button>
+	<head>
+		<style type="text/css">
+		body {
+			margin: 0px;
+			padding: 0px;
+			font-family: Ariel, Helvetica, Sans-serif;
+			font-size: 13px;
+		}
+		#popupContainerDiv {
+			min-width: 150px;
+			min-height: 150px;
+			max-height: 700px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="popupContainerDiv">
+			<p id="browser">Using: </p>
+			<p id="website">Using Reddit: </p>
+			<div id="userArea" />	
+		</div>
 		
-		<p id="p2"/>
-	</div>
-	<script src="main.js"></script>
-</body>
+		<script src="main.js"></script>
+	</body>
+</html>
