@@ -1,0 +1,26 @@
+*{
+margin: 0;
+}
+
+h1 {
+	font-size: 14px;
+	color: white;
+	text-align: center;
+}
+
+p{ 
+	padding: 5px 0px 0px;
+}
+body {
+	padding: 0px;
+	font-family: Helvetica,Roboto,Arial,sans-serif;
+	font-size: 13px;
+}
+#popupContainerDiv {
+	min-width: 190px;
+	
+}
+.popupBorder {
+	min-height: 20px;
+	background-color: lightblue;
+}

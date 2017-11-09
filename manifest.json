@@ -4,12 +4,30 @@
     "version": "0.1",
     "manifest_version": 2,
     "description": "This extension facilitates extracting data about a reddit post.",
-    "permissions": [
-        "tabs",
-        "storage"
-    ],
-    "browser_action": {
+
+    "background": {
+        "scripts": ["eventPage.js"],
+        "persistent": false
+    },
+
+    "browser_action":
+    {
         "default_icon": "icon.png",
         "default_popup": "mypopup.html"
-    }
+    },
+
+    "content_scripts":
+    [
+        {
+            "matches": ["<all_urls>"],
+            "js":["main.js"]
+        }
+    ],
+
+    "permissions":
+    [
+        "tabs",
+        "storage",
+        "contextMenus"
+    ]
 }

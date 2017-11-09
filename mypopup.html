@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" href="style.css">
 		<style type="text/css">
-		body {
-			margin: 0px;
-			padding: 0px;
-			font-family: Ariel, Helvetica, Sans-serif;
-			font-size: 13px;
-		}
-		#popupContainerDiv {
-			min-width: 190px;
-			
-		}
+		
 		</style>
 	</head>
 	<body>
 		<div id="popupContainerDiv">
+			<div class="popupBorder">
+				<h1>Reddit Post Parser</h1>
+			</div>
 			<p id="browser">Using: </p>
 			<p id="website">Using Reddit: </p>
 			
-			<div id="userAreaNew" "> 
-				Username:<br>
+			<div id="userAreaNew"> 
+				<p>Username:</p>
 				<input id="username"type="text"><br>
-				Password:<br>
+				<p>Password:</p>
 				<input id="password" type="password">
 				<button id="submit">Submit</button> 
 			</div>
-			<div id="userAreaExist" "> 
-				Current user: <br>
+			<div id="userAreaExist"> 
+				<p id="cUser">&nbsp;</p>
 				<button id="clear">Clear User</button>
 			</div>	
+			<div class="popupBorder">&nbsp;</div>
 		</div>
 		
 		<script src="main.js"></script>

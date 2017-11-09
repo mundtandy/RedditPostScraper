@@ -6,35 +6,39 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("clear").addEventListener("click", clearHandler);
 });
 
+browser = detectBrowser();
+setText('browser', browser, true);
+onReddit();
+setUserArea();
 
 // Detects Browser
 function detectBrowser() { 
 	if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
-		return 'Opera'
+		return 'Opera';
 	} else if(navigator.userAgent.indexOf("Chrome") != -1 ) {
-		return 'Chrome'
+		return 'Chrome';
 	} else if(navigator.userAgent.indexOf("Safari") != -1) {
-		return 'Safari'
+		return 'Safari';
 	} else if(navigator.userAgent.indexOf("Firefox") != -1 ) {
-		return 'Firefox'
-	} else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) /*IF IE > 10*/ {
-		return 'Edge'
+		return 'Firefox';
+	} else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode === true )) /*IF IE > 10*/ {
+		return 'Edge';
 	} else {
-		return 'Invalid browser'
+		return 'Invalid browser';
 	}
 }
 
 //detects hostname of current website URL, using browser specific function
 function onReddit(){
-	var tx = 'website'
+	var tx = 'website';
 	switch(browser) {
 		case 'Opera' :
 			//toAdd Opera version
 			break;
 		case 'Chrome' :
 			chrome.tabs.getSelected(null, function(tab) {
-				var urlHost = new URL(tab.url).hostname
-				setText(tx, (urlHost.match('www.reddit.com') ? 'yes' : 'no'))
+				var urlHost = new URL(tab.url).hostname;
+				setText(tx, (urlHost.match('www.reddit.com') ? 'yes' : 'no'), true);
 			});
 			break;
 		case 'Safari' :
@@ -47,53 +51,70 @@ function onReddit(){
 			//toAdd Edge version
 			break;
 		default :
-			setText(tx, 'Unknown')
+			setText(tx, 'Unknown', true);
 	}
 }
 
 //sets user area based on previous login details
 function setUserArea() {
-	//user doesn't exist
-	clearHandler()
-	//if stored user exists
-	//else
-		//setFresh()
-}
-
-
-
-//submit login details
-function submitHandler() {
-	if(document.getElementById('username').value.trim() == '' || document.getElementById('password').value.trim() == ''){
-		alert("Please ensure both fields are filled correctly")
-	} else {
-		//encrypt login
-		//var eu = CryptoJS.AES.encrypt(document.getElementById('username').value.trim(), 'firstlock');
-		//var ep = CryptoJS.AES.encrypt(document.getElementById('password').value.trim(), 'firstlock');
-		//var ek = CryptoJS.AES.encrypt('firstlock', 'secondlock');
-		
-		
-		//store user info
-		
-		
-		
-		document.getElementById('username').value = "";
-		document.getElementById('password').value = "";
-		
-		toggleDisplay('userAreaExist', 'userAreaNew');
+	if (loadVal('rppLogName') === null) { //user doesn't exist
+		clearHandler();
+	} else { //user does
+		loggedUser();
 	}
 }
 
-function clearHandler() {
-	//clear user
+//gets value stored in local Storage
+function loadVal(toLoad){
+	var toReturn = localStorage.getItem(toLoad);
 	
+	return (toReturn === null? null : (toReturn));
+}
+
+//display logged in div
+function loggedUser(){
+	var current = 'Current User: '+loadVal('rppLogName');
+	
+	setText('cUser', current, false);
+	toggleDisplay('userAreaExist', 'userAreaNew');
+}
+
+//display log in div
+function clearHandler() {
+	//clear user details
+	localStorage.removeItem('rppLogName');
+	localStorage.removeItem('rppLogPass');
 	
 	toggleDisplay('userAreaNew', 'userAreaExist');
 }
 
+//submit login details
+function submitHandler() {
+	var logUn = document.getElementById('username').value;
+	var logPw = document.getElementById('password').value;
+	
+	if(logUn == '' || logPw == ''){
+		alert("Please ensure both fields are filled correctly");
+	} else {
+		//Setting the value
+		localStorage.setItem('rppLogName', logUn);
+		localStorage.setItem('rppLogPass', logPw);
+		
+		//store user info	
+		document.getElementById('username').value = "";
+		document.getElementById('password').value = "";
+		
+		loggedUser();
+	}
+}
+
 //Helper Function to set text
-function setText(ele, toChange){
-	document.getElementById(ele).innerHTML += toChange;
+function setText(ele, toChange, concat){
+	if(concat) {
+		document.getElementById(ele).innerHTML += toChange;
+	} else {
+		document.getElementById(ele).innerHTML = toChange;
+	}
 }
 
 //Helper Function to toggle between login/user div
@@ -101,8 +122,3 @@ function toggleDisplay(div1, div2) {
 	document.getElementById(div1).style.display = 'block';
 	document.getElementById(div2).style.display = 'none';	
 }
-
-browser = detectBrowser()
-setText('browser', browser)
-onReddit()
-setUserArea()
