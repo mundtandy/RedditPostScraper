@@ -1,5 +1,5 @@
 // context menu stuff
-var showForPages = ["https://www.reddit.com/r/*/*"];
+var showForPages = ["https://www.reddit.com/r/*"];
 
 // Set up the context menus
 chrome.contextMenus.create({
