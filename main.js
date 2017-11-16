@@ -38,26 +38,25 @@ function loggedUser(){
 function clearHandler() {
 	//clear user details
 	localStorage.removeItem('rppLogName');
-	localStorage.removeItem('rppLogPass');
-	
+		
 	toggleDisplay('userAreaNew', 'userAreaExist');
 }
 
 //submit login details
 function submitHandler() {
 	var logUn = document.getElementById('username').value;
-	var logPw = document.getElementById('password').value;
 	
-	if(logUn == '' || logPw == ''){
+	
+	if(logUn == ''){
 		alert("Please ensure both fields are filled correctly");
 	} else {
 		//Setting the value
 		localStorage.setItem('rppLogName', logUn);
-		localStorage.setItem('rppLogPass', logPw);
+		
 		
 		//store user info	
 		document.getElementById('username').value = "";
-		document.getElementById('password').value = "";
+		
 		
 		loggedUser();
 	}
