@@ -8,21 +8,45 @@ h1 {
 	text-align: center;
 }
 
-p{ 
+p{
 	padding: 5px 0px 0px;
 }
+
 body {
 	padding: 0px;
 	font-family: Helvetica,Roboto,Arial,sans-serif;
 	font-size: 13px;
 }
+
 #popupContainerDiv {
 	min-width: 190px;
-	
+
 }
 .popupBorder {
 	min-height: 20px;
 	background-color: lightblue;
 }
 
-.
+.button {
+	background-color:white;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 12px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+	border: 2px solid #000000;
+	border-radius: 4px;
+}
+
+.wrap {
+	display: flex;
+	justify-content: space-between;
+
+}

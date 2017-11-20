@@ -3,7 +3,7 @@
 	<head>
 	<link rel="stylesheet" href="style.css">
 		<style type="text/css">
-		
+
 		</style>
 	</head>
 	<body>
@@ -11,20 +11,24 @@
 			<div class="popupBorder">
 				<h1>Reddit Post Parser</h1>
 			</div>
-				
-			<div id="userAreaNew"> 
-				<p>Username:</p>
-				<input id="username"type="text"><br>
-				
-				<button id="submit">Get Token</button> 
+			<div id="authenticate" class="wrap">
+				<button id="authen" class="button">Authenticate</button>
+				<button id="help" class="button">Help</button>
 			</div>
-			<div id="userAreaExist"> 
+			<div id="userAreaNew">
+				<p>Username:</p>
+				<input id="username" type="text"><br>
+
+				<button id="submit" class="button">Get Token</button>
+			</div>
+			<div id="userAreaExist">
 				<p id="cUser">&nbsp;</p>
-				<button id="clear">Clear User</button>
-			</div>	
+				<button id="clear" class="button">Clear User</button>
+			</div>
 			<div class="popupBorder">&nbsp;</div>
 		</div>
-		
+
 		<script src="main.js"></script>
+		<script src="event.js"></script>
 	</body>
 </html>
