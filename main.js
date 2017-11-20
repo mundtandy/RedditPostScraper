@@ -16,7 +16,7 @@ var client = {
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("submit").addEventListener("click", submitHandler);
 	document.getElementById("clear").addEventListener("click", clearHandler);
-    document.getElementById("authen").addEventListener("click", authenticate);
+    document.getElementById("authorise").addEventListener("click", authorise);
 });
 
 setUserArea();
@@ -44,14 +44,14 @@ function loggedUser(){
 	var current = 'Current User: '+loadVal('rppLogName');
 
 	setText('cUser', current, false);
-	toggleDisplay('userAreaExist', 'userAreaNew');
+	toggleDisplay('haveToken', 'getToken');
 }
 
 //display log in div
 function clearHandler() {
 	//clear user details
 	localStorage.removeItem('rppLogName');
-	toggleDisplay('userAreaNew', 'userAreaExist');
+	toggleDisplay('getToken', 'haveToken');
 }
 
 //submit login details
@@ -69,14 +69,14 @@ function submitHandler() {
 }
 
 //authenticate user
-function authenticate() {
-    var authen = `https://www.reddit.com/api/v1/authorize?`
+function authorise() {
+    var author = `https://www.reddit.com/api/v1/authorize?`
     +`client_id=${client.client_id}&response_type=${client.response_type}`
     +`&state=${client.state}&redirect_uri=${client.redirect_uri}`
     +`&duration=${client.duration}&scope=${client.scope}`
 
     chrome.tabs.update({
-     url: authen
+     url: author
     });
 }
 
