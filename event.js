@@ -14,15 +14,19 @@ chrome.contextMenus.create({
 
 //parse url
 function parseUrl(url){
-	
-	
 	var parsed = url.split("/");
-	var sub = parsed[4];
-	var id = "t3_"+parsed[6]; //"t3" is a link, "t1" is a comment
-	alert("sub: "+sub+"\nid: "+id);
+	if(parsed.length < 7)
+		alert('Please select a reddit post comment to parse');
+	else {
+		var sub = parsed[4];
+		var id = "t3_"+parsed[6]; //"t3" is a link, "t1" is a comment
+		
+		apiCall("Hello sub: "+sub+"\nid: "+id)
+	}
 }
 
 //calls Reddit Api
 function apiCall(obj) {
-	alert(obj.linkUrl);
+	var tokenReq = new XMLHttpRequest();
+	alert(obj);
 }
