@@ -12,11 +12,13 @@ var client = {
 
 }
 
-//add JS functionality to buttons 'Submit' and 'Clear'
+//add JS functionality to buttons
 document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById("submit").addEventListener("click", submitHandler);
+	document.getElementById("token").addEventListener("click", tokenClick);
 	document.getElementById("clear").addEventListener("click", clearHandler);
-    document.getElementById("authorise").addEventListener("click", authorise);
+    document.getElementById("authorise").addEventListener("click", authoriseClick);
+	document.getElementById("help").addEventListener("click", helpClick);
+	document.getElementById("back").addEventListener("click", backClick);
 });
 
 setUserArea();
@@ -41,43 +43,51 @@ function loadVal(toLoad){
 
 //display logged in div
 function loggedUser(){
-	var current = 'Current User: '+loadVal('rppLogName');
-
-	setText('cUser', current, false);
+	
 	toggleDisplay('haveToken', 'getToken');
 }
 
 //display log in div
 function clearHandler() {
 	//clear user details
-	localStorage.removeItem('rppLogName');
+	
 	toggleDisplay('getToken', 'haveToken');
 }
 
 //submit login details
-function submitHandler() {
-	var logUn = document.getElementById('username').value;
-	if(logUn == ''){
-		alert("Please ensure both fields are filled correctly");
-	} else {
+function tokenClick() {
+	//	alert('hello');
 		//Setting the value
-		localStorage.setItem('rppLogName', logUn);
+		
 		//store user info
-		document.getElementById('username').value = "";
+		
 		loggedUser();
-	}
+		
+	
 }
 
 //authenticate user
-function authorise() {
+function authoriseClick() {
     var author = `https://www.reddit.com/api/v1/authorize?`
     +`client_id=${client.client_id}&response_type=${client.response_type}`
     +`&state=${client.state}&redirect_uri=${client.redirect_uri}`
     +`&duration=${client.duration}&scope=${client.scope}`
-
-    chrome.tabs.update({
+	
+    chrome.tabs.create({
      url: author
     });
+}
+
+//https://www.reddit.com/?state=coiq3zow5u&code=ankXmh0GAEhGUMgIc0ekxh7vTvM
+
+//help display
+function helpClick() {
+	toggleDisplay('helpDiv', 'popupContainerDiv');
+}
+
+//back display
+function backClick() {
+	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
 
 //helpers

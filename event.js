@@ -19,8 +19,7 @@ function parseUrl(url){
 	var parsed = url.split("/");
 	var sub = parsed[4];
 	var id = "t3_"+parsed[6]; //"t3" is a link, "t1" is a comment
-	//alert("sub: "+sub+"\nid: "+id);
-	alert(client.secret);
+	alert("sub: "+sub+"\nid: "+id);
 }
 
 //calls Reddit Api

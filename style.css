@@ -2,14 +2,27 @@
 margin: 0;
 }
 
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+
+
 h1 {
 	font-size: 14px;
 	color: white;
 	text-align: center;
 }
 
-p{
-	padding: 5px 0px 0px;
+p {
+	padding: 5px 0px;
+	font-family: Century Gothic, sans-serif;
 }
 
 body {
@@ -20,8 +33,12 @@ body {
 
 #popupContainerDiv {
 	min-width: 190px;
-
 }
+
+#helpDiv {
+	min-width: 250px;
+}
+
 .popupBorder {
 	min-height: 20px;
 	background-color: lightblue;
@@ -34,6 +51,7 @@ body {
 	color: black;
 	padding: 5px 8px;
 	font-size: 12px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	-webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }

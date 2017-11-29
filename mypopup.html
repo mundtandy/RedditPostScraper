@@ -15,20 +15,39 @@
 				<button id="authorise" class="button">Authorise</button>
 				<button id="help" class="button">Help</button>
 			</div>
+			<hr>
 			<div id="getToken">
-				<p>Username:</p>
-				<input id="username" type="text"><br>
-
-				<button id="submit" class="button">Get Token</button>
+				<button id="token" class="button">Get Token</button>
 			</div>
 			<div id="haveToken">
-				<p id="cUser">&nbsp;</p>
 				<button id="clear" class="button">Clear User</button>
 			</div>
 			<div class="popupBorder">&nbsp;</div>
 		</div>
-
-		<script src="main.js"></script>
-		<script src="event.js"></script>
+		
+		<div id="helpDiv" style="display: none">
+			<div class="popupBorder">
+				<h1>Reddit Post Parser</h1>
+			</div>
+			<div class="wrap">
+				<p>Help.</p><button id="back" class="button">Back</button>
+			</div>
+			<hr>
+			<p>1. First, authorization is required. Select 'Authorise'. This should only need to be done 
+			once per user.</p>
+			<hr>
+			<p>2. Get a Token. This token gives an authorised user a 1 hour period of access to most Reddit API
+			Functionality. This will need to be done for each 1 hour period of time you want to make Parse Requests</p>
+			<hr>
+			<p>3. Parse. Right Click</p>
+			
+			
+			<div class="popupBorder">&nbsp;</div>
+		</div>
+	
+		
+		<script type="text/javascript" src="event.js"></script>
+		<script type="text/javascript" src="tokenReq.js"></script>
+		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
