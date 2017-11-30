@@ -7,7 +7,7 @@ var client = {
 	response_type:"code",
 	state:Math.random().toString(36).slice(2),
 	redirect_uri:"http://reddit.com", //stored redirect_uri, needs to match
-	duration:"temporary",
+	duration:"permanent",
 	scope:"read"
 
 }
@@ -56,12 +56,25 @@ function clearHandler() {
 
 //submit login details
 function tokenClick() {
-	//	alert('hello');
-		//Setting the value
+	//if first time
+	//if(localstorage blahblah)
+	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+		var curUrl = (tabs[0].url).toString();
 		
-		//store user info
+		var index = (curUrl).search('&code=');
 		
-		loggedUser();
+		if(index == -1)
+			alert('Please re-authorise, and attempt again after being redirected');
+		else {
+			var newUrl = curUrl.slice(index+6);
+			
+			alert(newUrl);
+		}
+	});
+	//} else {
+		//in this situation, get a refresh token!
+	//}
+	//loggedUser();
 		
 	
 }
