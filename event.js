@@ -29,4 +29,7 @@ function parseUrl(url){
 function apiCall(obj) {
 	var tokenReq = new XMLHttpRequest();
 	alert(obj);
+	
+	//Now we do API STUFF
 }
+

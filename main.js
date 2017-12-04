@@ -66,17 +66,56 @@ function tokenClick() {
 		if(index == -1)
 			alert('Please re-authorise, and attempt again after being redirected');
 		else {
-			var newUrl = curUrl.slice(index+6);
+			var authCode = curUrl.slice(index+6);
 			
-			alert(newUrl);
+			//alert(authCode);
+			tokenGet(authCode);
 		}
 	});
+	
+	
 	//} else {
 		//in this situation, get a refresh token!
 	//}
 	//loggedUser();
 		
 	
+}
+
+
+			//FIX ME Error: Unsupported Grant Type
+function tokenGet(authCode) {
+	var tokenReq = new XMLHttpRequest();
+
+    var base = "https://www.reddit.com/api/v1/access_token";
+    var clientID = client.client_id;
+    var secret = client.secret;    
+	
+	var postData = `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}`;
+    alert(postData);
+   tokenReq.open("POST", base, true); 
+   
+   tokenReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   tokenReq.setRequestHeader("Authorization", "Basic " + btoa(clientID + ":" + secret));
+   
+
+    tokenReq.addEventListener("load", function(){
+        //alert(tokenReq.status);
+        if(tokenReq.status >= 200 && tokenReq.status < 400){
+            
+           alert(tokenReq.responseText);
+
+           alert(response);
+       }
+
+         //   else{
+
+         //       alert("Network error"); 
+          //  }
+
+        });//end load function
+
+    tokenReq.send();
 }
 
 //authenticate user
