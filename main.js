@@ -83,7 +83,7 @@ function tokenClick() {
 }
 
 
-			//FIX ME Error: Unsupported Grant Type
+//FIXME: Parse Json, 
 function tokenGet(authCode) {
 	var tokenReq = new XMLHttpRequest();
 
@@ -105,7 +105,7 @@ function tokenGet(authCode) {
             
            alert(tokenReq.responseText);
 
-           alert(response);
+           //alert(response);
        }
 
          //   else{
@@ -115,7 +115,7 @@ function tokenGet(authCode) {
 
         });//end load function
 
-    tokenReq.send();
+    tokenReq.send(postData);
 }
 
 //authenticate user
