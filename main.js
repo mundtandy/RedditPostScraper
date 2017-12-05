@@ -69,7 +69,7 @@ function tokenClick() {
 			var authCode = curUrl.slice(index+6);
 			
 			//alert(authCode);
-			tokenGet(authCode);
+			tokenGet(authCode, true);
 		}
 	});
 	
@@ -84,40 +84,73 @@ function tokenClick() {
 
 
 //FIXME: Parse Json, 
-function tokenGet(authCode) {
+
+//var returned = thing{
+//	"access_token": "46LU7sVxIuAmP14uQPBLwu05dqc", 
+//	"token_type": "bearer", 
+//	"expires_in": 3600, 
+//	"refresh_token": "19684574-MbZDnv-WYQf8K_tHaurp8YOTXA4", 
+//	"scope": "read"
+//	} 
+function tokenGet(authCode, newToken) {
 	var tokenReq = new XMLHttpRequest();
 
-    var base = "https://www.reddit.com/api/v1/access_token";
+    var base = 'https://www.reddit.com/api/v1/access_token';
     var clientID = client.client_id;
     var secret = client.secret;    
 	
-	var postData = `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}`;
-    alert(postData);
-   tokenReq.open("POST", base, true); 
+	var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
+	
+	alert(postData);
+   	tokenReq.open('POST', base, true); 
    
-   tokenReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-   tokenReq.setRequestHeader("Authorization", "Basic " + btoa(clientID + ":" + secret));
+   	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
    
-
-    tokenReq.addEventListener("load", function(){
-        //alert(tokenReq.status);
+	tokenReq.addEventListener('load', function(){
+   		alert(tokenReq.status);
         if(tokenReq.status >= 200 && tokenReq.status < 400){
-            
-           alert(tokenReq.responseText);
+			var tokenJSON = JSON.parse(tokenReq.responseText);
+			alert(tokenJSON.scope);	   
+			   alert(response);
+			   
 
-           //alert(response);
-       }
-
-         //   else{
-
-         //       alert("Network error"); 
-          //  }
-
-        });//end load function
-
+     	} else{
+        	alert("Network error"); 
+        }
+    });
     tokenReq.send(postData);
 }
+/*
+function refreshGet(refToken){
+	var tokenReq = new XMLHttpRequest();
 
+	var base = 'https://www.reddit.com/api/v1/access_token';
+	var clientID = client.client_id;
+	var secret = client.secret;  
+	
+	var postData = `grant_type=refresh_token&refresh_token=${refToken}`;
+
+	tokenReq.open('POST', base, true); 
+	
+	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
+
+	tokenReq.addEventListener('load', function(){
+        //alert(tokenReq.status);
+        if(tokenReq.status >= 200 && tokenReq.status < 400){
+			var tokenJSON = JSON.parse(tokenReq.responseText);
+			alert(tokenJSON.scope);	   
+           //alert(response);
+       }
+         //   else{
+         //       alert("Network error"); 
+          //  }
+        });//end load function
+    tokenReq.send(postData);
+
+}
+*/
 //authenticate user
 function authoriseClick() {
     var author = `https://www.reddit.com/api/v1/authorize?`
@@ -134,7 +167,14 @@ function authoriseClick() {
 
 //help display
 function helpClick() {
-	toggleDisplay('helpDiv', 'popupContainerDiv');
+
+	var reUrl = chrome.extension.getURL('h/m.js').replace('h/m.js', '') + 'redirect.html';
+	
+	chrome.tabs.create({
+		url: reUrl
+    });
+	
+	//toggleDisplay('helpDiv', 'popupContainerDiv');
 }
 
 //back display
