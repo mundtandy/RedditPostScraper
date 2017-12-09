@@ -16,7 +16,7 @@
     [
         {
             "matches": ["<all_urls>"],
-            "js":["main.js", "tokenReq.js"]
+            "js":["main.js"]
         }
     ],
 

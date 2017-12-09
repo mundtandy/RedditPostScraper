@@ -16,12 +16,11 @@
 				<button id="help" class="button">Help</button>
 			</div>
 			<hr>
-			<div id="getToken">
+			<div id="getToken" class="wrap">
 				<button id="token" class="button">Get Token</button>
+				<p id="info" class="noToken" disabled>No token</p>
 			</div>
-			<div id="haveToken">
-				<button id="clear" class="button">Clear User</button>
-			</div>
+			
 			<div class="popupBorder">&nbsp;</div>
 		</div>
 		
@@ -33,13 +32,16 @@
 				<p>Help.</p><button id="back" class="button">Back</button>
 			</div>
 			<hr>
-			<p>1. First, authorization is required. Select 'Authorise'. This should only need to be done 
-			once per user.</p>
-			<hr>
-			<p>2. Get a Token. This token gives an authorised user a 1 hour period of access to most Reddit API
-			Functionality. This will need to be done for each 1 hour period of time you want to make Parse Requests</p>
-			<hr>
-			<p>3. Parse. Right Click</p>
+			<p>Using the Reddit API unfortunately requires 2 stages of validation.</p>
+			<p>First you will need to authenticate. This simply lets Reddit know you will be using your account to access the API. 
+				In most cases you should only need to do this once ever.</p>
+			<p>Every time you want to access the API, you will need to have an Token. A token lasts for 1 hour and you will need to
+				apply for a new one for every hour you want to use the API.</p>
+			<p>The very first time you use this extension, you will need to first Authenticate. This will open a new window. Simply select 'agree'.
+				This will then redirect you to reddit. From this page, select Token. The URL of this reddit page contains information
+				that needs to be collected in order to get your first token.
+				Any subsequent time you want to use this extension. You should simply only need to get a token. The only likely
+				situations where you will need to re-authenticate is if you are using a new computer, or you deleted Chrome/wiped any cache.</p>
 			
 			
 			<div class="popupBorder">&nbsp;</div>

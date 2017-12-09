@@ -63,6 +63,26 @@ body {
 	border-radius: 4px;
 }
 
+.noToken {
+	background-color:white;
+	border: 2px solid rgb(243, 4, 44);
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 12px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.yesToken{
+	background-color:white;
+	border: 2px solid rgb(243, 4, 44);
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 12px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
 .wrap {
 	display: flex;
 	justify-content: space-between;

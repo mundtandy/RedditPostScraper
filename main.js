@@ -15,8 +15,7 @@ var client = {
 //add JS functionality to buttons
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("token").addEventListener("click", tokenClick);
-	document.getElementById("clear").addEventListener("click", clearHandler);
-    document.getElementById("authorise").addEventListener("click", authoriseClick);
+	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
 });
@@ -26,13 +25,9 @@ setUserArea();
 //methods
 
 //sets user area based on previous login details
-function setUserArea() {
-	if (loadVal('rppLogName') === null) { //user doesn't exist
-		clearHandler();
-	} else { //user does
-		loggedUser();
-	}
-}
+//FIXME: should always have 'get token', isntead, should have panel for "has token or not"
+
+
 
 //gets value stored in local Storage
 function loadVal(toLoad){
@@ -41,18 +36,8 @@ function loadVal(toLoad){
 	return (toReturn === null? null : (toReturn));
 }
 
-//display logged in div
-function loggedUser(){
-	
-	toggleDisplay('haveToken', 'getToken');
-}
 
-//display log in div
-function clearHandler() {
-	//clear user details
-	
-	toggleDisplay('getToken', 'haveToken');
-}
+
 
 //submit login details
 function tokenClick() {
@@ -101,20 +86,25 @@ function tokenGet(authCode, newToken) {
 	
 	var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
 	
-	alert(postData);
+//	alert(postData);
    	tokenReq.open('POST', base, true); 
    
    	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
    
 	tokenReq.addEventListener('load', function(){
-   		alert(tokenReq.status);
+   	//	alert(tokenReq.status);
         if(tokenReq.status >= 200 && tokenReq.status < 400){
 			var tokenJSON = JSON.parse(tokenReq.responseText);
-			alert(tokenJSON.scope);	   
-			   alert(response);
-			   
-
+			
+			var now = new Date();
+			now.setTime(now.getTime() + (60*60*1000));
+			
+			alert(`${now.getHours()}:${now.getMinutes()}`);
+			
+			alert('Token received!');
+			//FIXME parse and store refresh token for later use. Store Access token for use with getting posts.  
+			document.getElementById('info').removeClass('noToken').addClass('yesToken');
      	} else{
         	alert("Network error"); 
         }
