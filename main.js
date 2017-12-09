@@ -1,3 +1,10 @@
+/*
+rTokenStatus: Used to determine if a refresh token code has been received. 0 or 1
+rAccToken: Current access token.
+rTokenOut: Time current token will expire
+rRefToken: Refresh Token.
+*/
+
 //initial
 var client = {
     user_agent:"Reddit Post Scraper /u/thealus",
@@ -9,7 +16,10 @@ var client = {
 	redirect_uri:"http://reddit.com", //stored redirect_uri, needs to match
 	duration:"permanent",
 	scope:"read"
+}
 
+if(loadVal('rTokenStatus') === null) {
+	localStorage.setItem('rTokenStatus', '0');
 }
 
 //add JS functionality to buttons
@@ -20,14 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("back").addEventListener("click", backClick);
 });
 
-setUserArea();
-
 //methods
-
-//sets user area based on previous login details
-//FIXME: should always have 'get token', isntead, should have panel for "has token or not"
-
-
 
 //gets value stored in local Storage
 function loadVal(toLoad){
@@ -37,32 +40,27 @@ function loadVal(toLoad){
 }
 
 
-
-
 //submit login details
 function tokenClick() {
-	//if first time
-	//if(localstorage blahblah)
-	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-		var curUrl = (tabs[0].url).toString();
-		
-		var index = (curUrl).search('&code=');
-		
-		if(index == -1)
-			alert('Please re-authorise, and attempt again after being redirected');
-		else {
-			var authCode = curUrl.slice(index+6);
+	if (loadVal('rTokenStatus') === '0') { //if first time
+		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+			var curUrl = (tabs[0].url).toString();
 			
-			//alert(authCode);
-			tokenGet(authCode, true);
-		}
-	});
+			var index = (curUrl).search('&code=');
+			
+			if(index == -1)
+				alert('Please re-authorise, and attempt again after being redirected');
+			else {
+				var authCode = curUrl.slice(index+6);
+				
+				//alert(authCode);
+				tokenGet(authCode, true);
+			}
+		});
+	} else { //if only need to get refresh token
+		tokenGet('', false);
+	}
 	
-	
-	//} else {
-		//in this situation, get a refresh token!
-	//}
-	//loggedUser();
 		
 	
 }
@@ -80,13 +78,15 @@ function tokenClick() {
 function tokenGet(authCode, newToken) {
 	var tokenReq = new XMLHttpRequest();
 
-    var base = 'https://www.reddit.com/api/v1/access_token';
-    var clientID = client.client_id;
-    var secret = client.secret;    
-	
+	var base = 'https://www.reddit.com/api/v1/access_token';
+	var clientID = client.client_id;
+	var secret = client.secret; 
+	var refToken = loadVal('rRefToken');
+		
 	var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
 	
-//	alert(postData);
+	alert(postData);
+	 
    	tokenReq.open('POST', base, true); 
    
    	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -96,53 +96,35 @@ function tokenGet(authCode, newToken) {
    	//	alert(tokenReq.status);
         if(tokenReq.status >= 200 && tokenReq.status < 400){
 			var tokenJSON = JSON.parse(tokenReq.responseText);
-			
+
 			var now = new Date();
 			now.setTime(now.getTime() + (60*60*1000));
+
+			localStorage.setItem('rTokenStatus', '1');
+			localStorage.setItem('rAccToken', tokenJSON.access_token);
+			localStorage.setItem('rTokenOut', now.toString());
+			
+			if(newToken){
+				localStorage.setItem('rRefToken', tokenJSON.refresh_token);
+			}
 			
 			alert(`${now.getHours()}:${now.getMinutes()}`);
 			
 			alert('Token received!');
 			//FIXME parse and store refresh token for later use. Store Access token for use with getting posts.  
-			document.getElementById('info').removeClass('noToken').addClass('yesToken');
+			
      	} else{
         	alert("Network error"); 
         }
     });
     tokenReq.send(postData);
 }
-/*
-function refreshGet(refToken){
-	var tokenReq = new XMLHttpRequest();
 
-	var base = 'https://www.reddit.com/api/v1/access_token';
-	var clientID = client.client_id;
-	var secret = client.secret;  
-	
-	var postData = `grant_type=refresh_token&refresh_token=${refToken}`;
-
-	tokenReq.open('POST', base, true); 
-	
-	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
-
-	tokenReq.addEventListener('load', function(){
-        //alert(tokenReq.status);
-        if(tokenReq.status >= 200 && tokenReq.status < 400){
-			var tokenJSON = JSON.parse(tokenReq.responseText);
-			alert(tokenJSON.scope);	   
-           //alert(response);
-       }
-         //   else{
-         //       alert("Network error"); 
-          //  }
-        });//end load function
-    tokenReq.send(postData);
-
-}
-*/
 //authenticate user
 function authoriseClick() {
+	localStorage.setItem('rTokenStatus', '0');
+	cullStorage();
+
     var author = `https://www.reddit.com/api/v1/authorize?`
     +`client_id=${client.client_id}&response_type=${client.response_type}`
     +`&state=${client.state}&redirect_uri=${client.redirect_uri}`
@@ -153,18 +135,16 @@ function authoriseClick() {
     });
 }
 
-//https://www.reddit.com/?state=coiq3zow5u&code=ankXmh0GAEhGUMgIc0ekxh7vTvM
+//removes stored token information
+function cullStorage(){
+	localStorage.removeItem('rAccToken');
+	localStorage.removeItem('rTokenOut');
+	localStorage.removeItem('rRefToken');
+}
 
 //help display
 function helpClick() {
-
-	var reUrl = chrome.extension.getURL('h/m.js').replace('h/m.js', '') + 'redirect.html';
-	
-	chrome.tabs.create({
-		url: reUrl
-    });
-	
-	//toggleDisplay('helpDiv', 'popupContainerDiv');
+	toggleDisplay('helpDiv', 'popupContainerDiv');
 }
 
 //back display
