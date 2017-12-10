@@ -15,7 +15,7 @@ var client = {
 	state:Math.random().toString(36).slice(2),
 	redirect_uri:"http://reddit.com", //stored redirect_uri, needs to match
 	duration:"permanent",
-	scope:"read"
+	scope:"*"
 }
 
 if(loadVal('rTokenStatus') === null) {

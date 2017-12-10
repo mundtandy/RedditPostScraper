@@ -18,18 +18,52 @@ function parseUrl(url){
 	if(parsed.length < 7)
 		alert('Please select a reddit post comment to parse');
 	else {
-		var sub = parsed[4];
-		var id = "t3_"+parsed[6]; //"t3" is a link, "t1" is a comment
+		var parsed = url+'.json';
 		
-		apiCall("Hello sub: "+sub+"\nid: "+id)
+		alert(parsed);
+		parseThing();
 	}
 }
 
-//calls Reddit Api
-function apiCall(obj) {
-	var tokenReq = new XMLHttpRequest();
-	alert(obj);
-	
-	//Now we do API STUFF
+/*
+ var url = https://oauth.reddit.com;
+ 
+ 	
+*/
+
+//gets value stored in local Storage
+function loadVal(toLoad){
+	var toReturn = localStorage.getItem(toLoad);
+
+	return (toReturn === null? null : (toReturn));
 }
 
+function parseThing() {
+	var tokenReq = new XMLHttpRequest();
+
+	var base = 'https://oauth.reddit.com/api/v1/me';
+	var token = loadVal('rAccToken');
+	
+   	tokenReq.open('GET', base, true); 
+	  
+	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   	tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');
+   	tokenReq.setRequestHeader('Authorization', `bearer ${token}`);
+   
+	alert(`bearer ${token}`);
+
+	tokenReq.addEventListener('load', function(){
+   		alert(tokenReq.status);
+	   
+		if(tokenReq.status >= 200 && tokenReq.status < 400){
+			var tokenJSON = JSON.parse(tokenReq.responseText);
+
+			alert(tokenReq.responseText);
+			
+			
+     	} else{
+        	alert("Network error"); 
+        }
+    });
+    tokenReq.send();
+}
