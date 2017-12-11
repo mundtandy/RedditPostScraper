@@ -18,10 +18,8 @@ function parseUrl(url){
 	if(parsed.length < 7)
 		alert('Please select a reddit post comment to parse');
 	else {
-		var parsed = url+'.json';
 		
-		alert(parsed);
-		parseThing();
+		parseThing(parsed[4], parsed[6]);
 	}
 }
 
@@ -38,11 +36,12 @@ function loadVal(toLoad){
 	return (toReturn === null? null : (toReturn));
 }
 
-function parseThing() {
+function parseThing(subreddit, thingId) {
 	var tokenReq = new XMLHttpRequest();
-
-	var base = 'https://oauth.reddit.com/api/v1/me';
+	var base = `https://oauth.reddit.com/r/${subreddit}/comments/${thingId}/`;
 	var token = loadVal('rAccToken');
+
+	alert(base);
 	
    	tokenReq.open('GET', base, true); 
 	  
@@ -58,7 +57,9 @@ function parseThing() {
 		if(tokenReq.status >= 200 && tokenReq.status < 400){
 			var tokenJSON = JSON.parse(tokenReq.responseText);
 
-			alert(tokenReq.responseText);
+			alert(JSON.stringify(tokenJSON));
+
+
 			
 			
      	} else{
