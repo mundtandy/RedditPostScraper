@@ -21,49 +21,8 @@ function parseUrl(url){
 		var parsed = url+'.json';
 		
 		alert(parsed);
-		parseThing();
+		$.getJSON(parsed, function(jsn){
+			alert(JSON.stringify(jsn));
+		});
 	}
-}
-
-/*
- var url = https://oauth.reddit.com;
- 
- 	
-*/
-
-//gets value stored in local Storage
-function loadVal(toLoad){
-	var toReturn = localStorage.getItem(toLoad);
-
-	return (toReturn === null? null : (toReturn));
-}
-
-function parseThing() {
-	var tokenReq = new XMLHttpRequest();
-
-	var base = 'https://oauth.reddit.com/api/v1/me';
-	var token = loadVal('rAccToken');
-	
-   	tokenReq.open('GET', base, true); 
-	  
-	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-   	tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');
-   	tokenReq.setRequestHeader('Authorization', `bearer ${token}`);
-   
-	alert(`bearer ${token}`);
-
-	tokenReq.addEventListener('load', function(){
-   		alert(tokenReq.status);
-	   
-		if(tokenReq.status >= 200 && tokenReq.status < 400){
-			var tokenJSON = JSON.parse(tokenReq.responseText);
-
-			alert(tokenReq.responseText);
-			
-			
-     	} else{
-        	alert("Network error"); 
-        }
-    });
-    tokenReq.send();
 }
