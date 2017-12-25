@@ -15,7 +15,7 @@ var client = {
 	state:Math.random().toString(36).slice(2),
 	redirect_uri:"http://reddit.com", //stored redirect_uri, needs to match
 	duration:"permanent",
-	scope:"*"
+	scope:"read"
 }
 
 if(loadVal('rTokenStatus') === null) {
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
+	document.getElementById("getFile").addEventListener("click", fileClick);
 });
 
 //methods
@@ -39,6 +40,12 @@ function loadVal(toLoad){
 	return (toReturn === null? null : (toReturn));
 }
 
+function fileClick(){
+	var fileUpload = document.getElementById("secretGetFile");
+	fileUpload.click(function() {
+		alert('hello');
+	});
+}
 
 //submit login details
 function tokenClick() {

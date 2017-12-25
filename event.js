@@ -38,7 +38,7 @@ function loadVal(toLoad){
 
 function parseThing(subreddit, thingId) {
 	var tokenReq = new XMLHttpRequest();
-	var base = `https://oauth.reddit.com/r/${subreddit}/comments/${thingId}/`;
+	var base = `https://oauth.reddit.com/by_id/t3_${thingId}`;
 	var token = loadVal('rAccToken');
 
 	alert(base);
@@ -56,8 +56,30 @@ function parseThing(subreddit, thingId) {
 	   
 		if(tokenReq.status >= 200 && tokenReq.status < 400){
 			var tokenJSON = JSON.parse(tokenReq.responseText);
+			
+			var postJSON = tokenJSON.data.children[0].data;
+			//NUMBER
 
-			alert(JSON.stringify(tokenJSON));
+			//PARSE-ABLE
+			//time posted (GMT/UTC)
+				//Day
+				//Date (DD/MM/YYYY)
+			//TITLE
+			var title = postJSON.title;
+			//USERNAME (link)
+			var un = `=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`;
+			//POINTS (score)
+			var points = postJSON.score;
+			//COMMENTS (number of)
+			var comments = postJSON.num_comments;
+			//LINK
+			var link = `=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`;
+			//MAYBE NOT PARSEABLE
+			//OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
+
+			alert(`Title: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`)
+			
+			
 
 
 			
