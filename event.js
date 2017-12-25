@@ -1,5 +1,5 @@
-// context menu stuff
 var showForPages = ["https://www.reddit.com/r/*"];
+var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 // Set up the context menus
 chrome.contextMenus.create({
@@ -61,9 +61,13 @@ function parseThing(subreddit, thingId) {
 			//NUMBER
 
 			//PARSE-ABLE
+			var timeUTC = new Date(postJSON.created_utc*1000);
 			//time posted (GMT/UTC)
+			
 				//Day
+			var day = days[timeUTC.getDay()];
 				//Date (DD/MM/YYYY)
+			var date = `${timeUTC.getDate()}/${timeUTC.getMonth()+1}/${timeUTC.getFullYear()}`
 			//TITLE
 			var title = postJSON.title;
 			//USERNAME (link)
@@ -77,7 +81,7 @@ function parseThing(subreddit, thingId) {
 			//MAYBE NOT PARSEABLE
 			//OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
 
-			alert(`Title: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`)
+			alert(`Day: ${day}\nDate: ${date}\nTitle: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`)
 			
 			
 
