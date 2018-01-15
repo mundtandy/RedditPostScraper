@@ -25,12 +25,15 @@
 			<hr>
 				<!--Panel 3-->
 			<div id="getFile" class="wrap">
-				<input id="secretGetFile" type="file">
-				<!--<button id="getFile" class="button">Select .xls</button>-->
+				<label class="secretGetFile">
+					<input type="file" required/>
+					<span>Select File</span>
+				</label>
+
 			</div>
 			<div class="popupBorder">&nbsp;</div>
 		</div>
-		
+
 		<div id="helpDiv" style="display: none">
 			<div class="popupBorder">
 				<h1>Reddit Post Parser</h1>
@@ -39,8 +42,8 @@
 				<p>Help.</p><button id="back" class="button">Back</button>
 			</div>
 			<hr>
-			<p>Using the Reddit API unfortunately requires 2 stages of validation.</p>
-			<p>First you will need to authenticate. This simply lets Reddit know you will be using your account to access the API. 
+			<p>Using the Reddit API requires 2 stages of validation.</p>
+			<p>First you will need to authenticate. This simply lets Reddit know you will be using your account to access the API.
 				In most cases you should only need to do this once ever.</p>
 			<p>Every time you want to access the API, you will need to have an Token. A token lasts for 1 hour and you will need to
 				apply for a new one for every hour you want to use the API.</p>
@@ -49,11 +52,11 @@
 				that needs to be collected in order to get your first token.
 				Any subsequent time you want to use this extension. You should simply only need to get a token. The only likely
 				situations where you will need to re-authenticate is if you are using a new computer, or you deleted Chrome/wiped any cache.</p>
-			
-			
+
+
 			<div class="popupBorder">&nbsp;</div>
 		</div>
-		
+
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

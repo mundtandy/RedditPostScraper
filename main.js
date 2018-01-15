@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
-	document.getElementById("getFile").addEventListener("click", fileClick);
+	
 });
 
 //methods
@@ -40,26 +40,21 @@ function loadVal(toLoad){
 	return (toReturn === null? null : (toReturn));
 }
 
-function fileClick(){
-	var fileUpload = document.getElementById("secretGetFile");
-	fileUpload.click(function() {
-		alert('hello');
-	});
-}
+
 
 //submit login details
 function tokenClick() {
 	if (loadVal('rTokenStatus') === '0') { //if first time
 		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 			var curUrl = (tabs[0].url).toString();
-			
+
 			var index = (curUrl).search('&code=');
-			
+
 			if(index == -1)
 				alert('Please re-authorise, and attempt again after being redirected');
 			else {
 				var authCode = curUrl.slice(index+6);
-				
+
 				//alert(authCode);
 				tokenGet(authCode, true);
 			}
@@ -67,38 +62,38 @@ function tokenClick() {
 	} else { //if only need to get refresh token
 		tokenGet('', false);
 	}
-	
-		
-	
+
+
+
 }
 
 
-//FIXME: Parse Json, 
+//FIXME: Parse Json,
 
 //var returned = thing{
-//	"access_token": "46LU7sVxIuAmP14uQPBLwu05dqc", 
-//	"token_type": "bearer", 
-//	"expires_in": 3600, 
-//	"refresh_token": "19684574-MbZDnv-WYQf8K_tHaurp8YOTXA4", 
+//	"access_token": "46LU7sVxIuAmP14uQPBLwu05dqc",
+//	"token_type": "bearer",
+//	"expires_in": 3600,
+//	"refresh_token": "19684574-MbZDnv-WYQf8K_tHaurp8YOTXA4",
 //	"scope": "read"
-//	} 
+//	}
 function tokenGet(authCode, newToken) {
 	var tokenReq = new XMLHttpRequest();
 
 	var base = 'https://www.reddit.com/api/v1/access_token';
 	var clientID = client.client_id;
-	var secret = client.secret; 
+	var secret = client.secret;
 	var refToken = loadVal('rRefToken');
-		
+
 	var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
-	
+
 	alert(postData);
-	 
-   	tokenReq.open('POST', base, true); 
-   
+
+   	tokenReq.open('POST', base, true);
+
    	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
-   
+
 	tokenReq.addEventListener('load', function(){
    	//	alert(tokenReq.status);
         if(tokenReq.status >= 200 && tokenReq.status < 400){
@@ -110,18 +105,18 @@ function tokenGet(authCode, newToken) {
 			localStorage.setItem('rTokenStatus', '1');
 			localStorage.setItem('rAccToken', tokenJSON.access_token);
 			localStorage.setItem('rTokenOut', now.toString());
-			
+
 			if(newToken){
 				localStorage.setItem('rRefToken', tokenJSON.refresh_token);
 			}
-			
+
 			alert(`${now.getHours()}:${now.getMinutes()}`);
-			
+
 			alert('Token received!');
-			//FIXME parse and store refresh token for later use. Store Access token for use with getting posts.  
-			
+			//FIXME parse and store refresh token for later use. Store Access token for use with getting posts.
+
      	} else{
-        	alert("Network error"); 
+        	alert("Network error");
         }
     });
     tokenReq.send(postData);
@@ -136,7 +131,7 @@ function authoriseClick() {
     +`client_id=${client.client_id}&response_type=${client.response_type}`
     +`&state=${client.state}&redirect_uri=${client.redirect_uri}`
     +`&duration=${client.duration}&scope=${client.scope}`
-	
+
     chrome.tabs.create({
      url: author
     });
