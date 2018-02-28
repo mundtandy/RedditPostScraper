@@ -22,26 +22,27 @@ if(loadVal('rTokenStatus') === null) {
 	localStorage.setItem('rTokenStatus', '0');
 }
 
+//set token text
+if(loadVal('rTokenOut') !== null) {
+    var then = new Date(loadVal('rTokenOut'));
+    //thenTime = then.getTime();
+    var text = (new Date().getTime() < then.getTime() ? `Token expires: ${then.getHours()}:${then.getMinutes()}` : 'No Token');
+
+    setText('currentToken', text, false);
+}
+
+//set file text
+
 //add JS functionality to buttons
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("token").addEventListener("click", tokenClick);
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
-	
+
 });
 
 //methods
-
-//gets value stored in local Storage
-function loadVal(toLoad){
-	var toReturn = localStorage.getItem(toLoad);
-
-	return (toReturn === null? null : (toReturn));
-}
-
-
-
 //submit login details
 function tokenClick() {
 	if (loadVal('rTokenStatus') === '0') { //if first time
@@ -104,7 +105,10 @@ function tokenGet(authCode, newToken) {
 
 			localStorage.setItem('rTokenStatus', '1');
 			localStorage.setItem('rAccToken', tokenJSON.access_token);
-			localStorage.setItem('rTokenOut', now.toString());
+
+            var curTime = now.toString();
+			localStorage.setItem('rTokenOut', curTime);
+            setText('currentToken', `Token expires: ${now.getHours()}:${now.getMinutes()}`, false);
 
 			if(newToken){
 				localStorage.setItem('rRefToken', tokenJSON.refresh_token);
@@ -113,7 +117,6 @@ function tokenGet(authCode, newToken) {
 			alert(`${now.getHours()}:${now.getMinutes()}`);
 
 			alert('Token received!');
-			//FIXME parse and store refresh token for later use. Store Access token for use with getting posts.
 
      	} else{
         	alert("Network error");
@@ -154,7 +157,20 @@ function backClick() {
 	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
 
-//helpers
+            //-- helpers
+
+//gets value stored in local Storage
+function loadVal(toLoad){
+	var toReturn = localStorage.getItem(toLoad);
+
+	return (toReturn === null? null : (toReturn));
+}
+
+
+//Heper function to change non-button setText
+function setButton(ele, text){
+    document.getElementById(ele).innerHTML=text;
+}
 
 //Helper Function to set text
 function setText(ele, toChange, concat){
