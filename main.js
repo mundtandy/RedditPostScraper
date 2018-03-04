@@ -31,6 +31,14 @@ if(loadVal('rTokenOut') !== null) {
     setText('currentToken', text, false);
 }
 
+//file upload
+var inputElement = document.getElementById("fileSelect");
+inputElement.addEventListener("change", handleFiles, false);
+function handleFiles() {
+//    alert('helo');
+    var fileList = this.files; /* now you can work with the file list */
+    setText('currentFile', fileList[0].name, false);
+}
 //set file text
 
 //add JS functionality to buttons
@@ -43,6 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //methods
+//file upload
+var inputElement = document.getElementById("fileSelect");
+inputElement.addEventListener("change", handleFiles, false);
+function handleFiles() {
+//    alert('helo');
+    var fileList = this.files; /* now you can work with the file list */
+    setText('currentFile', fileList[0].name, false);
+}
+
 //submit login details
 function tokenClick() {
 	if (loadVal('rTokenStatus') === '0') { //if first time
