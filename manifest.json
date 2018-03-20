@@ -16,12 +16,12 @@
     [
         {
             "matches": ["<all_urls>"],
-            "js":["main.js"]
+            "js":["JS/main.js"]
         }
     ],
 
 	"background": {
-		"scripts": ["event.js"]
+		"scripts": ["JS/event.js"]
 	},
 
     "permissions":
