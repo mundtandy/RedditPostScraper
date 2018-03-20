@@ -1,10 +1,21 @@
+// Handle vendor prefixes.
+window.onload = function() {
+
+    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+
+    // Check for support.
+    if (window.requestFileSystem) {
+    } else {
+        alert('requestFileSystem doesn't work.);
+    }
+}
 /*
 rTokenStatus: Used to determine if a refresh token code has been received. 0 or 1
 rAccToken: Current access token.
 rTokenOut: Time current token will expire
 rRefToken: Refresh Token.
 */
-
+var fileStored;
 //initial
 var client = {
     user_agent:"Reddit Post Scraper /u/thealus",
@@ -29,6 +40,10 @@ if(loadVal('rTokenOut') !== null) {
     var text = (new Date().getTime() < then.getTime() ? `Token expires: ${then.getHours()}:${then.getMinutes()}` : 'No Token');
 
     setText('currentToken', text, false);
+}
+
+if(fileStored !== null){
+    setText('currentFile', fileStored.name, false);
 }
 
 //file upload
@@ -58,6 +73,7 @@ function handleFiles() {
 //    alert('helo');
     var fileList = this.files; /* now you can work with the file list */
     setText('currentFile', fileList[0].name, false);
+    fileStored =  fileList[0];
 }
 
 //submit login details
