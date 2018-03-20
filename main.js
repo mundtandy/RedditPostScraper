@@ -6,7 +6,7 @@ window.onload = function() {
     // Check for support.
     if (window.requestFileSystem) {
     } else {
-        alert('requestFileSystem doesn't work.);
+        alert('requestFileSystem doesn\'t work.');
     }
 }
 /*
@@ -15,7 +15,9 @@ rAccToken: Current access token.
 rTokenOut: Time current token will expire
 rRefToken: Refresh Token.
 */
-var fileStored;
+
+
+
 //initial
 var client = {
     user_agent:"Reddit Post Scraper /u/thealus",
@@ -42,9 +44,6 @@ if(loadVal('rTokenOut') !== null) {
     setText('currentToken', text, false);
 }
 
-if(fileStored !== null){
-    setText('currentFile', fileStored.name, false);
-}
 
 //file upload
 var inputElement = document.getElementById("fileSelect");
@@ -58,6 +57,7 @@ function handleFiles() {
 
 //add JS functionality to buttons
 document.addEventListener('DOMContentLoaded', function() {
+
 	document.getElementById("token").addEventListener("click", tokenClick);
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
@@ -66,15 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //methods
-//file upload
-var inputElement = document.getElementById("fileSelect");
-inputElement.addEventListener("change", handleFiles, false);
-function handleFiles() {
-//    alert('helo');
-    var fileList = this.files; /* now you can work with the file list */
-    setText('currentFile', fileList[0].name, false);
-    fileStored =  fileList[0];
-}
+
 
 //submit login details
 function tokenClick() {
