@@ -1,14 +1,5 @@
 // Handle vendor prefixes.
-window.onload = function() {
 
-    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-
-    // Check for support.
-    if (window.requestFileSystem) {
-    } else {
-        alert('requestFileSystem doesn\'t work.');
-    }
-}
 /*
 rTokenStatus: Used to determine if a refresh token code has been received. 0 or 1
 rAccToken: Current access token.
