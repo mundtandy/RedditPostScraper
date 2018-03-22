@@ -1,3 +1,7 @@
+try {
+
+var X = XLSX;
+
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
   // All File Api work
@@ -163,27 +167,32 @@ function backClick() {
 	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
 
-var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+//var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
 function handleFile(e) {
     var f = e.target.files[0];
     var reader = new FileReader();
 
     reader.onload = function(e) {
         var data = e.target.result;
-        /*alert(rABS);
-        if(!rABS){
 
-            data = new Uint8Array(data);
-        }*/
-    //    var workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'});
-        var workbook = XLSX.read(data, 'binary');
-    /* DO SOMETHING WITH workbook HERE */
+    //    if(!rABS){
+        //    data = new Uint8Array(data);
+    //    }
+
+        //var workbook = X.read(data, {type: rABS ? 'binary' : 'array'});
+        var workbook = X.read(data, 'binary');
+        //interact with workbook where
+       var first_sheet_name = workbook.SheetNames[0];
+        alert(first_sheet_name);
+
     };
     //if(rABS){
-        reader.readAsBinaryString(f);
-    /*} else {
-        reader.readAsArrayBuffer(f);
-    }*/
+    reader.readAsBinaryString(f);
+
+
+    //} else {
+    //    reader.readAsArrayBuffer(f);
+    //}
     setText('currentFile', f.name, false);
 }
 //set file text
@@ -216,4 +225,8 @@ function setText(ele, toChange, concat){
 function toggleDisplay(div1, div2) {
 	document.getElementById(div1).style.display = 'block';
 	document.getElementById(div2).style.display = 'none';
+}
+
+} catch(err) {
+    alert(err.message);
 }
