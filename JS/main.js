@@ -1,3 +1,10 @@
+// Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // All File Api work
+} else {
+  alert('The File APIs are not fully supported in this browser.');
+}
+
 // Handle vendor prefixes.
 
 /*
@@ -35,43 +42,29 @@ if(loadVal('rTokenOut') !== null) {
     setText('currentToken', text, false);
 }
 
-
-//file upload
-var inputElement = document.getElementById("fileSelect");
-inputElement.addEventListener("change", handleFiles, false);
-function handleFiles() {
-//    alert('helo');
-    var fileList = this.files; /* now you can work with the file list */
-    setText('currentFile', fileList[0].name, false);
-}
-//set file text
-
 //add JS functionality to buttons
 document.addEventListener('DOMContentLoaded', function() {
-
 	document.getElementById("token").addEventListener("click", tokenClick);
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
+    document.getElementById("fileSelect").addEventListener("change", handleFiles, false);
 
 });
 
-//methods
-
+//     methods
 
 //submit login details
 function tokenClick() {
 	if (loadVal('rTokenStatus') === '0') { //if first time
 		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 			var curUrl = (tabs[0].url).toString();
-
 			var index = (curUrl).search('&code=');
 
 			if(index == -1)
 				alert('Please re-authorise, and attempt again after being redirected');
 			else {
 				var authCode = curUrl.slice(index+6);
-
 				//alert(authCode);
 				tokenGet(authCode, true);
 			}
@@ -83,9 +76,6 @@ function tokenClick() {
 
 
 }
-
-
-//FIXME: Parse Json,
 
 //var returned = thing{
 //	"access_token": "46LU7sVxIuAmP14uQPBLwu05dqc",
@@ -172,6 +162,14 @@ function helpClick() {
 function backClick() {
 	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
+
+function handleFiles() {
+    var fileList = this.files; /* now you can work with the file list */
+    setText('currentFile', fileList[0].name, false);
+
+    alert(typeof fileList[0]);
+}
+//set file text
 
             //-- helpers
 
