@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("authorise").addEventListener("click", authoriseClick);
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
-    document.getElementById("fileSelect").addEventListener("change", handleFiles, false);
+    document.getElementById("fileSelect").addEventListener('change', handleFile, false);
 
 });
 
@@ -163,11 +163,28 @@ function backClick() {
 	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
 
-function handleFiles() {
-    var fileList = this.files; /* now you can work with the file list */
-    setText('currentFile', fileList[0].name, false);
+var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+function handleFile(e) {
+    var f = e.target.files[0];
+    var reader = new FileReader();
 
-    alert(typeof fileList[0]);
+    reader.onload = function(e) {
+        var data = e.target.result;
+        /*alert(rABS);
+        if(!rABS){
+
+            data = new Uint8Array(data);
+        }*/
+    //    var workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'});
+        var workbook = XLSX.read(data, 'binary');
+    /* DO SOMETHING WITH workbook HERE */
+    };
+    //if(rABS){
+        reader.readAsBinaryString(f);
+    /*} else {
+        reader.readAsArrayBuffer(f);
+    }*/
+    setText('currentFile', f.name, false);
 }
 //set file text
 
