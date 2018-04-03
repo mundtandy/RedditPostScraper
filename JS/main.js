@@ -2,6 +2,7 @@ try {
 
 var X = XLSX;
 
+
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
   // All File Api work
@@ -37,6 +38,11 @@ if(loadVal('rTokenStatus') === null) {
 	localStorage.setItem('rTokenStatus', '0');
 }
 
+if(loadVal('fileName') !== null) {
+    toggleDisplay('haveFile', 'getFile');
+    setText('currentFile', loadVal('fileName'), false);
+}
+
 //set token text
 if(loadVal('rTokenOut') !== null) {
     var then = new Date(loadVal('rTokenOut'));
@@ -53,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
     document.getElementById("fileSelect").addEventListener('change', handleFile, false);
+    document.getElementById("fileSave").addEventListener("click", saveFile);
+    document.getElementById("fileView").addEventListener("click", viewFile);
 
 });
 
@@ -76,9 +84,6 @@ function tokenClick() {
 	} else { //if only need to get refresh token
 		tokenGet('', false);
 	}
-
-
-
 }
 
 //var returned = thing{
@@ -125,7 +130,6 @@ function tokenGet(authCode, newToken) {
 			}
 
 			alert(`${now.getHours()}:${now.getMinutes()}`);
-
 			alert('Token received!');
 
      	} else{
@@ -167,23 +171,26 @@ function backClick() {
 	toggleDisplay('popupContainerDiv', 'helpDiv');
 }
 
-//var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
 function handleFile(e) {
     var f = e.target.files[0];
     var reader = new FileReader();
+    var workbook;
 
     reader.onload = function(e) {
         var data = e.target.result;
 
-    //    if(!rABS){
-        //    data = new Uint8Array(data);
-    //    }
+        workbook = X.read(data, {type: rABS ? 'binary' : 'array'});
 
-        //var workbook = X.read(data, {type: rABS ? 'binary' : 'array'});
-        var workbook = X.read(data, 'binary');
+
+
+        //var workbook = X.read(data, 'binary');
+       // alert("here");
         //interact with workbook where
-       var first_sheet_name = workbook.SheetNames[0];
-        alert(first_sheet_name);
+        var first_sheet_name = workbook.SheetNames[0];
+       // alert(workbook);
+
+        X.writeFile(workbook, "export321321.xlsx");
 
     };
     //if(rABS){
@@ -194,8 +201,21 @@ function handleFile(e) {
     //    reader.readAsArrayBuffer(f);
     //}
     setText('currentFile', f.name, false);
+    localStorage.setItem('fileName', f.name);
+
+    toggleDisplay('haveFile', 'getFile');
 }
+
+
 //set file text
+function saveFile(e) {
+    localStorage.removeItem('fileName');
+    toggleDisplay( 'getFile', 'haveFile');
+}
+
+function viewFile() {
+	//TODO: something.
+}
 
             //-- helpers
 
@@ -227,6 +247,9 @@ function toggleDisplay(div1, div2) {
 	document.getElementById(div2).style.display = 'none';
 }
 
+
+
 } catch(err) {
     alert(err.message);
 }
+

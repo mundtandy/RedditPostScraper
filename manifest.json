@@ -17,6 +17,7 @@
         {
             "matches": ["<all_urls>"],
             "js":[
+                "JS/FileSaver.js",
                 "JS/jszip.js",
                 "JS/xlsx.js",
                 "JS/main.js"
@@ -27,14 +28,17 @@
 
 	"background": {
 		"scripts": [
+
             "JS/event.js"
         ]
 	},
 
     "permissions":
     [
+        "downloads",
         "tabs",
         "storage",
         "contextMenus"
+
     ]
 }
