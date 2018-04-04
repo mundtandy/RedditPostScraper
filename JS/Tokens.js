@@ -35,7 +35,7 @@ function tokenGet(authCode, newToken) {
 
     var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
 
-    alert(postData);
+    //alert(postData);
 
     tokenReq.open('POST', base, true);
 
@@ -61,7 +61,7 @@ function tokenGet(authCode, newToken) {
                 localStorage.setItem('rRefToken', tokenJSON.refresh_token);
             }
 
-            alert(`${now.getHours()}:${now.getMinutes()}`);
+          //  alert(`${now.getHours()}:${now.getMinutes()}`);
             alert('Token received!');
 
         } else{

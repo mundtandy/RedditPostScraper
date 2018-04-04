@@ -53,13 +53,16 @@ try {
 	if(loadVal('rTokenOut') !== null) {
 		var then = new Date(loadVal('rTokenOut'));
 		//thenTime = then.getTime();
-		var text = (new Date().getTime() < then.getTime() ? `Token expires: ${then.getHours()}:${then.getMinutes()}` : 'No Token');
+		var text = (validTime() ? `Token expires: ${then.getHours()}:${then.getMinutes()}` : 'No Token');
 
 		setText('currentToken', text, false);
 	}
 
 	if(loadVal('fileName') !== null) {
+        toggleDisplay('haveFile', 'getFile');
         setText('currentFile', loadVal('fileName'), false);
+	} else {
+        toggleDisplay('getFile','haveFile');
 	}
 
 	//add JS functionality to buttons
@@ -69,9 +72,12 @@ try {
 		document.getElementById("help").addEventListener("click", helpClick);
 		document.getElementById("back").addEventListener("click", backClick);
 		document.getElementById("fileSelect").addEventListener('change', handleFile, false);
+        document.getElementById("changeFile").addEventListener('click', dropFile);
+        document.getElementById("parse").addEventListener('click', parse);
+
 	});
 
-	//     methods
+			//-- methods
 	//help display
 	function helpClick() {
 		toggleDisplay('helpDiv', 'popupContainerDiv');
@@ -82,7 +88,30 @@ try {
 		toggleDisplay('popupContainerDiv', 'helpDiv');
 	}
 
-			//-- helpers
+	function dropFile() {
+        localStorage.removeItem('fileName');
+        localStorage.removeItem('parseKey');
+        toggleDisplay('getFile', 'haveFile');
+	}
+
+	function parse() {
+		if(loadVal('parseKey') === null) {
+			alert("Please Import a valid file");
+		} else if(loadVal('rAccToken') === null) {
+			alert("Please get a Token");
+		} else if(!validTime()) {
+			alert("Token expired, please get a new one.")
+		} else {
+			alert("Yay gonna get the posts now");
+		}
+	}
+
+	function validTime(){
+		var then = new Date(loadVal('rTokenOut'));
+		//thenTime = then.getTime();
+		return new Date().getTime() < then.getTime();
+	}
+        //-- helpers
 
 	//gets value stored in local Storage
 	function loadVal(toLoad){
@@ -111,8 +140,6 @@ try {
 		document.getElementById(div1).style.display = 'block';
 		document.getElementById(div2).style.display = 'none';
 	}
-
-
 
 } catch(err) {
     alert(err.message);

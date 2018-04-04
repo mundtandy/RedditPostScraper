@@ -2,7 +2,7 @@
 margin: 0;
 }
 
-hr {
+hr.split{
     display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -16,8 +16,10 @@ hr {
 
 h1 {
 	font-size: 14px;
-	color: white;
+	color: Black;
 	text-align: center;
+
+	font-family: Century Gothic, sans-serif;
 }
 
 p {
@@ -32,7 +34,10 @@ body {
 }
 
 #popupContainerDiv {
-	min-width: 210px;
+	min-width: 350px;
+	background-color:white;
+	border: 2px solid rgb(0, 4, 44);
+	border-radius: 4px;
 }
 
 #helpDiv {
@@ -54,6 +59,21 @@ body {
 	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	-webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
+}
+
+.button1 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:white;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 20px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
 }
 
 .button:hover {
@@ -86,7 +106,12 @@ body {
 .wrap {
 	display: flex;
 	justify-content: space-between;
+}
 
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 label.secretGetFile input[type="file"] {

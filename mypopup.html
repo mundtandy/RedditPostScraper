@@ -12,27 +12,36 @@
 			<div class="popupBorder">
 				<h1>Reddit Post Parser</h1>
 			</div>
+			<hr>
 			<!--Panel 1-->
 			<div id="authenticate" class="wrap">
 				<button id="authorise" class="button">Authorise</button>
 				<button id="help" class="button">Help</button>
 			</div>
 			<!--Panel 2-->
-			<hr>
+			<hr class="split">
 			<div id="getToken" class="wrap">
 				<button id="token" class="button">Get Token</button>
 				<p id="currentToken" class="noToken" disabled>No token</p>
 			</div>
-			<hr>
+			<hr class="split">
 				<!--Panel 3-->
 			<div id="getFile" class="wrap">
 				<label class="secretGetFile">
 					<input id="fileSelect" type="file" accept=".xls,.xlsx" required/>
 					<span>Import File</span>
 				</label>
+
+			</div>
+			<div id="haveFile" class="wrap"><!-- style="display: none">-->
+				<button id="changeFile" class="button">Change File</button>
 				<p id="currentFile" class="noToken" disabled>No File</p>
 			</div>
-			<div class="popupBorder">&nbsp;</div>
+			<hr class="split">
+				<!--Panel 4-->
+			<div id="parseReddit" class="wrap">
+				<button id="parse" class="button1">Scrape Posts</button>
+			</div>
 
 		</div>
 

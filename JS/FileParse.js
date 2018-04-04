@@ -22,6 +22,7 @@ function handleFile(e) {
 
     setText('currentFile', f.name, false);
     localStorage.setItem('fileName', f.name);
+    toggleDisplay('haveFile', 'getFile');
 }
 
 function getSheet(arr){
@@ -30,8 +31,10 @@ function getSheet(arr){
         for (var i = 0; i < arr.length; i++) {
             stringtoshow += arr[i];
         }
-        alert(stringtoshow);
+
     }
+    //TODO add functionality to select sheet
+
     return arr[0];
 }
 
