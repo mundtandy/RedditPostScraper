@@ -21,6 +21,7 @@
                 "JS/jszip.js",
                 "JS/xlsx.js",
                 "JS/Tokens.js",
+                "JS/FileParse",
                 "JS/main.js"
 
             ]
