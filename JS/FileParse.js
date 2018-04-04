@@ -22,7 +22,7 @@ function handleFile(e) {
 
     setText('currentFile', f.name, false);
     localStorage.setItem('fileName', f.name);
-    toggleDisplay('haveFile', 'getFile');
+    toggleDisplay('haveFile', 'getFile', true);
 }
 
 function getSheet(arr){

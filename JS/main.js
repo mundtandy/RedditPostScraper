@@ -59,10 +59,10 @@ try {
 	}
 
 	if(loadVal('fileName') !== null) {
-        toggleDisplay('haveFile', 'getFile');
+        toggleDisplay('haveFile', 'getFile', true);
         setText('currentFile', loadVal('fileName'), false);
 	} else {
-        toggleDisplay('getFile','haveFile');
+        toggleDisplay('getFile','haveFile', true);
 	}
 
 	//add JS functionality to buttons
@@ -80,18 +80,18 @@ try {
 			//-- methods
 	//help display
 	function helpClick() {
-		toggleDisplay('helpDiv', 'popupContainerDiv');
+		toggleDisplay('helpDiv', 'popupContainerDiv', false);
 	}
 
 	//back display
 	function backClick() {
-		toggleDisplay('popupContainerDiv', 'helpDiv');
+		toggleDisplay('popupContainerDiv', 'helpDiv', false);
 	}
 
 	function dropFile() {
         localStorage.removeItem('fileName');
         localStorage.removeItem('parseKey');
-        toggleDisplay('getFile', 'haveFile');
+        toggleDisplay('getFile', 'haveFile', true);
 	}
 
 	function parse() {
@@ -136,8 +136,8 @@ try {
 	}
 
 	//Helper Function to toggle between login/user div
-	function toggleDisplay(div1, div2) {
-		document.getElementById(div1).style.display = 'block';
+	function toggleDisplay(div1, div2, panel) {
+		document.getElementById(div1).style.display = (panel ? 'flex' : 'block');
 		document.getElementById(div2).style.display = 'none';
 	}
 

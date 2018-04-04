@@ -61,7 +61,7 @@ function tokenGet(authCode, newToken) {
                 localStorage.setItem('rRefToken', tokenJSON.refresh_token);
             }
 
-          //  alert(`${now.getHours()}:${now.getMinutes()}`);
+            alert(`${now.getHours()}:${now.getMinutes()}`);
             alert('Token received!');
 
         } else{
