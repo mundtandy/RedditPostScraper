@@ -20,6 +20,7 @@
                 "JS/FileSaver.js",
                 "JS/jszip.js",
                 "JS/xlsx.js",
+                "JS/Tokens.js",
                 "JS/main.js"
 
             ]

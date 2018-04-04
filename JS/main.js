@@ -1,6 +1,20 @@
 try {
+/*
+TODO:
+
+Extract column headers to determine fields.
+
+Examine Reddit search by subreddit api.
+
+search by top/recent etc, date?
+
+Gather n posts satisfying above post
+
+Place into excel (named by search maybes)
+ */
 
 var X = XLSX;
+
 
 
 // Check for the various File API support.
@@ -19,8 +33,7 @@ rTokenOut: Time current token will expire
 rRefToken: Refresh Token.
 */
 
-
-
+	
 //initial
 var client = {
     user_agent:"Reddit Post Scraper /u/thealus",
@@ -36,11 +49,6 @@ var client = {
 
 if(loadVal('rTokenStatus') === null) {
 	localStorage.setItem('rTokenStatus', '0');
-}
-
-if(loadVal('fileName') !== null) {
-    toggleDisplay('haveFile', 'getFile');
-    setText('currentFile', loadVal('fileName'), false);
 }
 
 //set token text
@@ -59,108 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("help").addEventListener("click", helpClick);
 	document.getElementById("back").addEventListener("click", backClick);
     document.getElementById("fileSelect").addEventListener('change', handleFile, false);
-    document.getElementById("fileSave").addEventListener("click", saveFile);
-    document.getElementById("fileView").addEventListener("click", viewFile);
-
 });
 
 //     methods
-
-//submit login details
-function tokenClick() {
-	if (loadVal('rTokenStatus') === '0') { //if first time
-		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-			var curUrl = (tabs[0].url).toString();
-			var index = (curUrl).search('&code=');
-
-			if(index == -1)
-				alert('Please re-authorise, and attempt again after being redirected');
-			else {
-				var authCode = curUrl.slice(index+6);
-				//alert(authCode);
-				tokenGet(authCode, true);
-			}
-		});
-	} else { //if only need to get refresh token
-		tokenGet('', false);
-	}
-}
-
-//var returned = thing{
-//	"access_token": "46LU7sVxIuAmP14uQPBLwu05dqc",
-//	"token_type": "bearer",
-//	"expires_in": 3600,
-//	"refresh_token": "19684574-MbZDnv-WYQf8K_tHaurp8YOTXA4",
-//	"scope": "read"
-//	}
-function tokenGet(authCode, newToken) {
-	var tokenReq = new XMLHttpRequest();
-
-	var base = 'https://www.reddit.com/api/v1/access_token';
-	var clientID = client.client_id;
-	var secret = client.secret;
-	var refToken = loadVal('rRefToken');
-
-	var postData = (newToken ? `grant_type=authorization_code&code=${authCode}&redirect_uri=${client.redirect_uri}` : `grant_type=refresh_token&refresh_token=${refToken}`);
-
-	alert(postData);
-
-   	tokenReq.open('POST', base, true);
-
-   	tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-   	tokenReq.setRequestHeader('Authorization', 'Basic ' + btoa(clientID + ':' + secret));
-
-	tokenReq.addEventListener('load', function(){
-   	//	alert(tokenReq.status);
-        if(tokenReq.status >= 200 && tokenReq.status < 400){
-			var tokenJSON = JSON.parse(tokenReq.responseText);
-
-			var now = new Date();
-			now.setTime(now.getTime() + (60*60*1000));
-
-			localStorage.setItem('rTokenStatus', '1');
-			localStorage.setItem('rAccToken', tokenJSON.access_token);
-
-            var curTime = now.toString();
-			localStorage.setItem('rTokenOut', curTime);
-            setText('currentToken', `Token expires: ${now.getHours()}:${now.getMinutes()}`, false);
-
-			if(newToken){
-				localStorage.setItem('rRefToken', tokenJSON.refresh_token);
-			}
-
-			alert(`${now.getHours()}:${now.getMinutes()}`);
-			alert('Token received!');
-
-     	} else{
-        	alert("Network error");
-        }
-    });
-    tokenReq.send(postData);
-}
-
-//authenticate user
-function authoriseClick() {
-	localStorage.setItem('rTokenStatus', '0');
-	cullStorage();
-
-    var author = `https://www.reddit.com/api/v1/authorize?`
-    +`client_id=${client.client_id}&response_type=${client.response_type}`
-    +`&state=${client.state}&redirect_uri=${client.redirect_uri}`
-    +`&duration=${client.duration}&scope=${client.scope}`
-
-    chrome.tabs.create({
-     url: author
-    });
-}
-
-//removes stored token information
-function cullStorage(){
-	localStorage.removeItem('rAccToken');
-	localStorage.removeItem('rTokenOut');
-	localStorage.removeItem('rRefToken');
-}
-
 //help display
 function helpClick() {
 	toggleDisplay('helpDiv', 'popupContainerDiv');
@@ -182,40 +91,50 @@ function handleFile(e) {
 
         workbook = X.read(data, {type: rABS ? 'binary' : 'array'});
 
+		var worksheet = workbook.Sheets[getSheet(workbook.SheetNames)];
 
+		var range = X.utils.decode_range(worksheet[["!ref"]]);
 
-        //var workbook = X.read(data, 'binary');
-       // alert("here");
-        //interact with workbook where
-        var first_sheet_name = workbook.SheetNames[0];
-       // alert(workbook);
+	 	var key = getKey(worksheet, range);
 
-        X.writeFile(workbook, "export321321.xlsx");
-
-    };
-    //if(rABS){
+	 	localStorage.setItem('parseKey', JSON.stringify(key));
+	}
     reader.readAsBinaryString(f);
 
-
-    //} else {
-    //    reader.readAsArrayBuffer(f);
-    //}
     setText('currentFile', f.name, false);
     localStorage.setItem('fileName', f.name);
-
-    toggleDisplay('haveFile', 'getFile');
 }
 
-
-//set file text
-function saveFile(e) {
-    localStorage.removeItem('fileName');
-    toggleDisplay( 'getFile', 'haveFile');
+function getSheet(arr){
+    if(arr.length > 1) {
+        var stringtoshow = "";
+        for (var i = 0; i < arr.length; i++) {
+            stringtoshow += arr[i];
+        }
+        alert(stringtoshow);
+    }
+    return arr[0];
 }
 
-function viewFile() {
-	//TODO: something.
+function getKey(ws, range){
+    var key = [];
+
+    var header;
+    //parse thru columns of sheet
+    for(var C=range.s.c; C<= range.e.c; C++) {
+        //parse each row of that column for header info
+        for(var R = range.s.r; R < 3; R++){
+            var nextCell = ws[X.utils.encode_cell({r: R, c: C})];
+            if( typeof nextCell !== 'undefined' )
+                header = nextCell.w;
+
+        }
+        key.push(header);
+    }
+
+    return key;
 }
+
 
             //-- helpers
 
