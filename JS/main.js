@@ -2,7 +2,9 @@ try {
 	/*
 	TODO:
 
-	Extract column headers to determine fields.
+	Extract column headers to determine fields. (done)
+
+	Fix Token TIME issue.
 
 	Examine Reddit search by subreddit api.
 
@@ -61,8 +63,6 @@ try {
 	if(loadVal('fileName') !== null) {
         toggleDisplay('haveFile', 'getFile', true);
         setText('currentFile', loadVal('fileName'), false);
-	} else {
-        toggleDisplay('getFile','haveFile', true);
 	}
 
 	//add JS functionality to buttons
@@ -102,7 +102,19 @@ try {
 		} else if(!validTime()) {
 			alert("Token expired, please get a new one.")
 		} else {
-			alert("Yay gonna get the posts now");
+            chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+                var curUrl = (tabs[0].url).toString();
+                if(!curUrl.startsWith('https://www.reddit.com/r/')){
+                	alert("Please navigate to the subreddit you wish to scrape posts from.");
+				} else {
+                    var subreddit = curUrl.split("/")[4];
+
+                    //var worksheet =
+					parseThing(subreddit, 'new', 1);
+
+				}
+
+            });
 		}
 	}
 
@@ -142,6 +154,6 @@ try {
 	}
 
 } catch(err) {
-    alert(err.message);
+    alert(err.lineNumber +"\n"+err.message);
 }
 

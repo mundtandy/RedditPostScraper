@@ -56,3 +56,7 @@ function getKey(ws, range){
 
     return key;
 }
+
+function parseToWS(finalArr){
+
+}

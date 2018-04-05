@@ -20,8 +20,8 @@
                 "JS/FileSaver.js",
                 "JS/jszip.js",
                 "JS/xlsx.js",
-                "JS/Tokens.js",
-                "JS/FileParse",
+                "JS/APITalk.js",
+                "JS/FileParse.js",
                 "JS/main.js"
 
             ]
