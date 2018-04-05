@@ -146,46 +146,9 @@ function cullStorage(){
             var index = 0;
             if(tokenReq.status >= 200 && tokenReq.status < 400){
                 var tokenJSON = JSON.parse(tokenReq.responseText);
-                alert(tokenJSON.data.dist);
-                var tempArr;
-                var finalArr;
-                for(var i = 0; i < tokenJSON.data.dist; i++) {
-                    tempArry = [];
-                    var postJSON = tokenJSON.data.children[0].data;
 
-                    //NUMBER
-                    var indexNum = index++;
-                    //PARSE-ABLE
-                    var timeUTC = new Date(postJSON.created_utc * 1000);
-                    //time posted (GMT/UTC)
+                parseJSON(tokenJSON);
 
-                    //Day
-                    var day = days[timeUTC.getDay()];
-                    //Date (DD/MM/YYYY)
-                    var date = `${timeUTC.getDate()}/${timeUTC.getMonth() + 1}/${timeUTC.getFullYear()}`
-                    //Time
-                    var hour = `${timeUTC.getHours()}:${timeUTC.getMinutes()}:${timeUTC.getSeconds()}`;
-                    //TITLE
-                    var title = postJSON.title;
-                    //USERNAME (link)
-                    var un = `=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`;
-                    //POINTS (score)
-                    var points = postJSON.score;
-                    //COMMENTS (number of)
-                    var comments = postJSON.num_comments;
-                    //LINK
-                    var link = `=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`;
-
-                    var tag = postJSON.link_flair_text;
-                    //MAYBE NOT PARSEABLE
-                    //OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
-
-                    alert(`#: ${indexNum}\nDay: ${day}\nDate: ${date}\nTitle: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`);
-
-                }
-                finalArr.push(tempArr);
-
-                //parseToWS(finalArr);
 
 
             } else{
