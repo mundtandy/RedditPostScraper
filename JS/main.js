@@ -110,7 +110,8 @@ try {
                     var subreddit = curUrl.split("/")[4];
 
                     //var worksheet =
-					parseThing(subreddit, 'new', 1);
+					parseThing(subreddit, 'new', 100);
+					alert(days[0]);
 
 				}
 
@@ -156,4 +157,3 @@ try {
 } catch(err) {
     alert(err.lineNumber +"\n"+err.message);
 }
-

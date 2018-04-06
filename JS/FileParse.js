@@ -1,4 +1,6 @@
+var X = XLSX;
 
+var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
 function handleFile(e) {
     var f = e.target.files[0];
@@ -59,42 +61,56 @@ function getKey(ws, range){
 
 function parseJSON(jsOBJ){
     var index = 0;
-    alert(jsOBJ.data.dist);
-    //for(var i = 0; i < tokenJSON.data.dist; i++) {
-    var postJSON = jsOBJ.data.children[1].data;
+    //alert(jsOBJ.data.dist);
+    var parsedFinal = [];
+    for(var i = 0; i < jsOBJ.data.dist; i++) {
+        var postJSON = jsOBJ.data.children[i].data;
+        var temp = [];
+        //NUMBER
+        //var indexNum = index++;
+        temp.push(index++);
+        //PARSE-ABLE
+        var timeUTC = new Date(postJSON.created_utc * 1000);
+        //time posted (GMT/UTC)
 
-    //NUMBER
-    var indexNum = index++;
-    //PARSE-ABLE
-    var timeUTC = new Date(postJSON.created_utc * 1000);
-    //time posted (GMT/UTC)
+        //Day
+        //var day = days[timeUTC.getDay()];
+        temp.push(days[timeUTC.getDay()]);
+        //Date (DD/MM/YYYY)
+        var date = `${timeUTC.getDate()}/${timeUTC.getMonth() + 1}/${timeUTC.getFullYear()}`
+        temp.push(date);
+        //Time
+        var hour = `${timeUTC.getHours()}:${timeUTC.getMinutes()}:${timeUTC.getSeconds()}`;
+        temp.push(hour);
+        //TITLE
+        var title = postJSON.title;
+        temp.push(title);
+        //USERNAME (link)
+        var un = `=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`;
+        temp.push(un);
+        //POINTS (score)
+        var points = postJSON.score;
+        temp.push(points);
+        //COMMENTS (number of)
+        var comments = postJSON.num_comments;
+        temp.push(comments);
+        //LINK
+        var link = `=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`;
+        temp.push(link);
+        var tag = postJSON.link_flair_text;
+        temp.push(tag);
+        //MAYBE NOT PARSEABLE
+        //OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
 
-    //Day
-    var day = days[timeUTC.getDay()];
-    //Date (DD/MM/YYYY)
-    var date = `${timeUTC.getDate()}/${timeUTC.getMonth() + 1}/${timeUTC.getFullYear()}`
-    //Time
-    var hour = `${timeUTC.getHours()}:${timeUTC.getMinutes()}:${timeUTC.getSeconds()}`;
-    //TITLE
-    var title = postJSON.title;
-    //USERNAME (link)
-    var un = `=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`;
-    //POINTS (score)
-    var points = postJSON.score;
-    //COMMENTS (number of)
-    var comments = postJSON.num_comments;
-    //LINK
-    var link = `=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`;
+        parsedFinal.push(temp);
+        //alert(`#: ${indexNum}\nDay: ${day}\nDate: ${date}\nTitle: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`);
+    }
 
-    var tag = postJSON.link_flair_text;
-    //MAYBE NOT PARSEABLE
-    //OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
 
-    alert(`#: ${indexNum}\nDay: ${day}\nDate: ${date}\nTitle: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`);
-
-    // }
+    return parsedFinal;
 }
 
-function parseToWS(finalArr){
-
+function writeToFile(toWrite){
+    alert("At To Write: "+toWrite.length);
 }
+

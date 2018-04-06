@@ -1,4 +1,5 @@
 try {
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 //submit login details
 function tokenClick() {
@@ -6,7 +7,6 @@ function tokenClick() {
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
             var curUrl = (tabs[0].url).toString();
             var index = (curUrl).search('&code=');
-
             if(index == -1)
                 alert('Please re-authorise, and attempt again after being redirected');
             else {
@@ -63,7 +63,7 @@ function tokenGet(authCode, newToken) {
                 localStorage.setItem('rRefToken', tokenJSON.refresh_token);
             }
 
-          //  alert(`${now.getHours()}:${now.getMinutes()}`);
+
             alert('Token received!');
 
         } else{
@@ -88,47 +88,10 @@ function authoriseClick() {
     });
 }
 
-//removes stored token information
-function cullStorage(){
-    localStorage.removeItem('rAccToken');
-    localStorage.removeItem('rTokenOut');
-    localStorage.removeItem('rRefToken');
-}
-
-
-
-    var showForPages = ["https://www.reddit.com/r/*"];
-    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-// Set up the context menus
-//parse url
-    function parseUrl(url){
-        var parsed = url.split("/");
-        if(parsed.length < 7)
-            alert('Please select a reddit post comment to parse');
-        else {
-
-            //get Using Tokens
-            parseThing(parsed[4], parsed[6]);
-        }
-    }
-
-    /*
-     var url = https://oauth.reddit.com;
-
-
-    */
-
-//gets value stored in local Storage
-    function loadVal(toLoad){
-        var toReturn = localStorage.getItem(toLoad);
-
-        return (toReturn === null? null : (toReturn));
-    }
-
     function parseThing(subreddit, sort, num) {
+
         var tokenReq = new XMLHttpRequest();
-        var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=100`;
+        var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${num}`;
         var token = loadVal('rAccToken');
 
 
@@ -142,22 +105,27 @@ function cullStorage(){
 
 
         tokenReq.addEventListener('load', function(){
-            //alert(tokenReq.status);
-            var index = 0;
             if(tokenReq.status >= 200 && tokenReq.status < 400){
-                var tokenJSON = JSON.parse(tokenReq.responseText);
+                var postsJSON = JSON.parse(tokenReq.responseText);
 
-                parseJSON(tokenJSON);
+                var toWrite = parseJSON(postsJSON);
 
-
-
+                writeToFile(toWrite);
             } else{
                 alert(tokenReq.status+"\nNetwork error");
             }
         });
         tokenReq.send();
+
+
     }
 } catch(err) {
     alert(err.message);
 }
 
+//removes stored token information
+function cullStorage(){
+    localStorage.removeItem('rAccToken');
+    localStorage.removeItem('rTokenOut');
+    localStorage.removeItem('rRefToken');
+}
