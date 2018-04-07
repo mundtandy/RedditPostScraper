@@ -33,7 +33,7 @@ body {
 	font-size: 13px;
 }
 
-#popupContainerDiv {
+.mainPanel {
 	min-width: 350px;
 	background-color:white;
 	border: 2px solid rgb(0, 4, 44);
@@ -145,4 +145,8 @@ label.secretGetFile input[type="file"] {
     color: white;
 	border: 2px solid #000000;
 	border-radius: 4px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
 }

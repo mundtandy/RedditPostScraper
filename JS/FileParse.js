@@ -60,57 +60,76 @@ function getKey(ws, range){
 }
 
 function parseJSON(jsOBJ){
+
     var index = 0;
-    //alert(jsOBJ.data.dist);
+    var key = JSON.parse(loadVal('parseKey'));
     var parsedFinal = [];
     for(var i = 0; i < jsOBJ.data.dist; i++) {
         var postJSON = jsOBJ.data.children[i].data;
-        var temp = [];
-        //NUMBER
-        //var indexNum = index++;
-        temp.push(index++);
-        //PARSE-ABLE
         var timeUTC = new Date(postJSON.created_utc * 1000);
-        //time posted (GMT/UTC)
-
-        //Day
-        //var day = days[timeUTC.getDay()];
-        temp.push(days[timeUTC.getDay()]);
-        //Date (DD/MM/YYYY)
-        var date = `${timeUTC.getDate()}/${timeUTC.getMonth() + 1}/${timeUTC.getFullYear()}`
-        temp.push(date);
-        //Time
-        var hour = `${timeUTC.getHours()}:${timeUTC.getMinutes()}:${timeUTC.getSeconds()}`;
-        temp.push(hour);
-        //TITLE
-        var title = postJSON.title;
-        temp.push(title);
-        //USERNAME (link)
-        var un = `=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`;
-        temp.push(un);
-        //POINTS (score)
-        var points = postJSON.score;
-        temp.push(points);
-        //COMMENTS (number of)
-        var comments = postJSON.num_comments;
-        temp.push(comments);
-        //LINK
-        var link = `=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`;
-        temp.push(link);
-        var tag = postJSON.link_flair_text;
-        temp.push(tag);
-        //MAYBE NOT PARSEABLE
-        //OP SOURCE,TYPE (5 options, mark with X) ,CODE,LOOKING FOR,A or P, Found Source, Found?, Notes, Removal + Re-Request
-
+        var temp = [];
+        for (var j = 0; j <key.length; j++) {
+            switch(key[j]){
+                case '#':
+                    temp.push(index++);
+                    break;
+                case 'Day':
+                    temp.push(days[timeUTC.getDay()]);
+                    break;
+                case 'Date':
+                    temp.push(`${timeUTC.getDate()}/${timeUTC.getMonth() + 1}/${timeUTC.getFullYear()}`);
+                    break;
+                case 'Hour':
+                    temp.push(`${timeUTC.getHours()}:${timeUTC.getMinutes()}:${timeUTC.getSeconds()}`);
+                    break;
+                case 'Title':
+                    temp.push(postJSON.title);
+                    break;
+                case 'Username':
+                    temp.push(`=HYPERLINK("https://www.reddit.com/user/${postJSON.author}","${postJSON.author}")`);
+                    break;
+                case 'Tag':
+                    temp.push(postJSON.link_flair_text);
+                    break;
+                case 'Points':
+                    temp.push(postJSON.score);
+                    break;
+                case 'Comments':
+                    temp.push(postJSON.num_comments);
+                    break;
+                case 'Link':
+                    temp.push(`=HYPERLINK("https://www.reddit.com${postJSON.permalink}")`);
+                    break;
+                default:
+                    temp.push("");
+            }
+        }
         parsedFinal.push(temp);
-        //alert(`#: ${indexNum}\nDay: ${day}\nDate: ${date}\nTitle: ${title}\nUserName: ${un}\nPoints: ${points}\nComments: ${comments}\nLink: ${link}`);
+
     }
-
-
     return parsedFinal;
 }
 
-function writeToFile(toWrite){
-    alert("At To Write: "+toWrite.length);
-}
+try {
 
+    function writeToFile(toWrite) {
+        alert("second");
+       // alert("At To Write: " + toWrite.length);
+
+
+        var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
+        //To actually distribute the file, use one of the techniques outlined in the README. For example, you can use writeFile in node:
+       var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
+        var newWin = open('url', 'windowName', 'height=300,width=300');
+        newWin.document.write(toShow);
+       // var wopts = {bookType: 'xlsx', bookSST: false, type: 'array'};
+        X.writeFile(wb, 'test.xlsx');
+       // saveAs(new Blob([wbout], {type: "application/octet-stream"}), "test.xlsx");
+
+       // alert("At To Write: " + toWrite.length);
+    }
+
+
+} catch(err){
+    alert(err.message);
+}

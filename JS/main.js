@@ -17,7 +17,9 @@ try {
 
 	var X = XLSX;
 
-	// Check for the various File API support.
+
+
+   	// Check for the various File API support.
 	if (window.File && window.FileReader && window.FileList && window.Blob) {
 	  // All File Api work
 	} else {
@@ -73,9 +75,17 @@ try {
 		document.getElementById("back").addEventListener("click", backClick);
 		document.getElementById("fileSelect").addEventListener('change', handleFile, false);
         document.getElementById("changeFile").addEventListener('click', dropFile);
+        document.getElementById("enterSearch").addEventListener('click', enterClick);
+       	document.getElementById("backSearch").addEventListener('click', backSearchClick);
         document.getElementById("parse").addEventListener('click', parse);
 
 	});
+
+    function dropFile() {
+        localStorage.removeItem('fileName');
+        localStorage.removeItem('parseKey');
+        toggleDisplay('getFile', 'haveFile', true);
+    }
 
 			//-- methods
 	//help display
@@ -88,13 +98,13 @@ try {
 		toggleDisplay('popupContainerDiv', 'helpDiv', false);
 	}
 
-	function dropFile() {
-        localStorage.removeItem('fileName');
-        localStorage.removeItem('parseKey');
-        toggleDisplay('getFile', 'haveFile', true);
+
+    function backSearchClick() {
+        setText('subredditSearch', 'No Subreddit', false);
+        toggleDisplay('popupContainerDiv', 'searchOptions',  false);
 	}
 
-	function parse() {
+	function enterClick() {
 		if(loadVal('parseKey') === null) {
 			alert("Please Import a valid file");
 		} else if(loadVal('rAccToken') === null) {
@@ -108,15 +118,23 @@ try {
                 	alert("Please navigate to the subreddit you wish to scrape posts from.");
 				} else {
                     var subreddit = curUrl.split("/")[4];
-
-                    //var worksheet =
-					parseThing(subreddit, 'new', 100);
-					alert(days[0]);
-
+                    setText('subredditSearch', subreddit, false);
+                   // parseThing(subreddit, '0', 100);
+                    toggleDisplay('searchOptions', 'popupContainerDiv', false);
 				}
-
             });
 		}
+	}
+
+	function parse() {
+    	var subreddit = document.getElementById('subredditSearch').innerHTML;
+
+    	var type = document.querySelector('input[name="searchType"]:checked').value;
+
+    	var nums = document.querySelector('input[name="postsNum"]').value;
+
+    	var returned = parseThing(subreddit, type, nums);
+    	alert("Vals:"+returned);
 	}
 
 	function validTime(){
@@ -154,6 +172,9 @@ try {
 		document.getElementById(div2).style.display = 'none';
 	}
 
+
+
 } catch(err) {
     alert(err.lineNumber +"\n"+err.message);
 }
+

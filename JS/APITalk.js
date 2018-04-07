@@ -1,4 +1,6 @@
 try {
+    var X = XLSX;
+
     var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 //submit login details
@@ -63,7 +65,6 @@ function tokenGet(authCode, newToken) {
                 localStorage.setItem('rRefToken', tokenJSON.refresh_token);
             }
 
-
             alert('Token received!');
 
         } else{
@@ -88,36 +89,46 @@ function authoriseClick() {
     });
 }
 
+    //TODO: Suss above 100 till 1000
+        //per 100
+        //get AFTER value from json
+        //add AFTER VALUE to base
+        //move WriteToFile outside of for loop to use all num/10 AoAs
+        //see if you can now return and then write the Workbook to file.
+        //https://loading.io/progress/ check out for fun loading bar
+
     function parseThing(subreddit, sort, num) {
+        var val = 0;
 
-        var tokenReq = new XMLHttpRequest();
-        var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${num}`;
-        var token = loadVal('rAccToken');
+        for(var i = 0; i < 5; i++) {
+            var tokenReq = new XMLHttpRequest();
+            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${num}`;
+            var token = loadVal('rAccToken');
+
+            tokenReq.open('GET', base, false); //false to force NOT ASYNC
+
+            tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');
+            tokenReq.setRequestHeader('Authorization', `bearer ${token}`);
+
+            tokenReq.addEventListener('load', function () {
+                if (tokenReq.status >= 200 && tokenReq.status < 400) {
+                    var postsJSON = JSON.parse(tokenReq.responseText);
+
+                    var toWrite = parseJSON(postsJSON);
+                    alert("hi")
+                    //writeToFile(toWrite);
+                    val++;
+                } else {
+                    alert(tokenReq.status + "\nNetwork error");
+                }
+            });
+            tokenReq.send();
+
+        }
 
 
-
-        tokenReq.open('GET', base, true);
-
-        tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');
-        tokenReq.setRequestHeader('Authorization', `bearer ${token}`);
-
-
-
-        tokenReq.addEventListener('load', function(){
-            if(tokenReq.status >= 200 && tokenReq.status < 400){
-                var postsJSON = JSON.parse(tokenReq.responseText);
-
-                var toWrite = parseJSON(postsJSON);
-
-                writeToFile(toWrite);
-            } else{
-                alert(tokenReq.status+"\nNetwork error");
-            }
-        });
-        tokenReq.send();
-
-
+        return val;
     }
 } catch(err) {
     alert(err.message);
