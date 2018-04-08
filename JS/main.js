@@ -127,14 +127,19 @@ try {
 	}
 
 	function parse() {
-    	var subreddit = document.getElementById('subredditSearch').innerHTML;
+        var nums = document.querySelector('input[name="postsNum"]').value;
+        if(nums > 0 && nums <= 1000) {
+            var subreddit = document.getElementById('subredditSearch').innerHTML;
 
-    	var type = document.querySelector('input[name="searchType"]:checked').value;
+            var type = document.querySelector('input[name="searchType"]:checked').value;
 
-    	var nums = document.querySelector('input[name="postsNum"]').value;
 
-    	var returned = parseThing(subreddit, type, nums);
-    	alert("Vals:"+returned);
+
+
+
+            var returned = parseThing(subreddit, type, nums);
+            alert("Vals:"+returned);
+        }
 	}
 
 	function validTime(){

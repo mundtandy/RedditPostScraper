@@ -64,6 +64,7 @@ function parseJSON(jsOBJ){
     var index = 0;
     var key = JSON.parse(loadVal('parseKey'));
     var parsedFinal = [];
+    alert(jsOBJ.data.after);
     for(var i = 0; i < jsOBJ.data.dist; i++) {
         var postJSON = jsOBJ.data.children[i].data;
         var timeUTC = new Date(postJSON.created_utc * 1000);

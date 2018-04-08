@@ -99,10 +99,19 @@ function authoriseClick() {
 
     function parseThing(subreddit, sort, num) {
         var val = 0;
+        var newnum = 100;
+        /*
+        var testNum = nums;
+            var result = "";
+            while (testNum > 0) {
+                result += (testNum >= 100 ? 100 : testNum % 100) + ",";
+                testNum -= 100;
+            }
+         */
 
         for(var i = 0; i < 5; i++) {
             var tokenReq = new XMLHttpRequest();
-            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${num}`;
+            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${newnum}`;
             var token = loadVal('rAccToken');
 
             tokenReq.open('GET', base, false); //false to force NOT ASYNC
