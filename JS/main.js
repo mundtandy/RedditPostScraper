@@ -138,7 +138,7 @@ try {
 
 
             var returned = parseThing(subreddit, type, nums);
-            alert("Vals:"+returned);
+            writeToFile(returned);
         }
 	}
 

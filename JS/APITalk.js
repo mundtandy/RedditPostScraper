@@ -96,22 +96,19 @@ function authoriseClick() {
         //move WriteToFile outside of for loop to use all num/10 AoAs
         //see if you can now return and then write the Workbook to file.
         //https://loading.io/progress/ check out for fun loading bar
+        //each completion of loop add num/1000 to 'loaded val'
 
     function parseThing(subreddit, sort, num) {
-        var val = 0;
-        var newnum = 100;
-        /*
-        var testNum = nums;
-            var result = "";
-            while (testNum > 0) {
-                result += (testNum >= 100 ? 100 : testNum % 100) + ",";
-                testNum -= 100;
-            }
-         */
+        var index = num;
+        var toWrite = [];
+        var after;
 
-        for(var i = 0; i < 5; i++) {
+        while(index > 0) {
+            var numToSearch = (index >= 100 ? 100 : index % 100);
+
+            //API Search
             var tokenReq = new XMLHttpRequest();
-            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${newnum}`;
+            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${numToSearch}`+(after === undefined ? `` : `&after=${after}`);
             var token = loadVal('rAccToken');
 
             tokenReq.open('GET', base, false); //false to force NOT ASYNC
@@ -123,21 +120,18 @@ function authoriseClick() {
             tokenReq.addEventListener('load', function () {
                 if (tokenReq.status >= 200 && tokenReq.status < 400) {
                     var postsJSON = JSON.parse(tokenReq.responseText);
-
-                    var toWrite = parseJSON(postsJSON);
-                    alert("hi")
-                    //writeToFile(toWrite);
-                    val++;
+                    parseJSON(postsJSON, toWrite);
+                    after = postsJSON.data.after;
                 } else {
                     alert(tokenReq.status + "\nNetwork error");
                 }
             });
             tokenReq.send();
 
+            index -= 100;
         }
 
-
-        return val;
+        return toWrite;
     }
 } catch(err) {
     alert(err.message);
