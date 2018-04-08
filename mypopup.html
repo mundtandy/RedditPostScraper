@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="stylesheet" href="style.css">
-		<style type="text/css">
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 
-		</style>
 	</head>
 	<body>
 		<!--Main Panel-->
@@ -61,6 +59,13 @@
 				</div><br>
 				<div class="wrap">Number of Posts:<input type="number" class="noToken" name="postsNum" value=100 min=1 max=1000 /></div>
 				<hr class="split">
+				<div	id="lBar"
+						data-preset="stripe"
+						class="ldBar label-center"
+						data-value="0"
+						data-img-size="200,100">
+				</div>
+				<hr class="split">
 				<div class="wrap">
 					<button id="backSearch" class="button1">Back</button>
 					<button id="parse" class="button1">Scrape Posts</button></div>
@@ -90,8 +95,6 @@
 
 			<div class="popupBorder">&nbsp;</div>
 		</div>
-
-
 		<script type="text/javascript" src="JS/jszip.js"></script>
 		<script type="text/javascript" src="JS/xlsx.js"></script>
 		<script type="text/javascript" src="JS/FileSaver.js"></script>

@@ -104,6 +104,7 @@ function authoriseClick() {
         var after;
 
         while(index > 0) {
+
             var numToSearch = (index >= 100 ? 100 : index % 100);
 
             //API Search
@@ -122,6 +123,7 @@ function authoriseClick() {
                     var postsJSON = JSON.parse(tokenReq.responseText);
                     parseJSON(postsJSON, toWrite);
                     after = postsJSON.data.after;
+
                 } else {
                     alert(tokenReq.status + "\nNetwork error");
                 }
@@ -130,7 +132,6 @@ function authoriseClick() {
 
             index -= 100;
         }
-
         return toWrite;
     }
 } catch(err) {

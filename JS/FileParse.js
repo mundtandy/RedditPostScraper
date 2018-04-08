@@ -115,7 +115,7 @@ try {
         var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
         //To actually distribute the file, use one of the techniques outlined in the README. For example, you can use writeFile in node:
        var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
-        var newWin = open('url', 'windowName', 'height=300,width=300');
+        var newWin = open('url', 'Hello', 'height=300,width=600');
         newWin.document.write(toShow);
        // var wopts = {bookType: 'xlsx', bookSST: false, type: 'array'};
       // \\ X.writeFile(wb, 'test.xlsx');
