@@ -98,7 +98,7 @@ function authoriseClick() {
         //https://loading.io/progress/ check out for fun loading bar
         //each completion of loop add num/1000 to 'loaded val'
 
-    function parseThing(subreddit, sort, num) {
+    function parseThing(subreddit, sort, num, from, nsfw) {
         var index = num;
         var toWrite = [];
         var after;
@@ -109,10 +109,11 @@ function authoriseClick() {
 
             //API Search
             var tokenReq = new XMLHttpRequest();
-            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${numToSearch}`+(after === undefined ? `` : `&after=${after}`);
+            var base = `https://oauth.reddit.com/r/${subreddit}/${sort}?limit=${numToSearch}&t=${from}`
+                +(nsfw ? `&include_over_18=on` : ``)
+                +(after === undefined ? `` : `&after=${after}`);
             var token = loadVal('rAccToken');
-
-            tokenReq.open('GET', base, false); //false to force NOT ASYNC
+      tokenReq.open('GET', base, false); //false to force NOT ASYNC
 
             tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');

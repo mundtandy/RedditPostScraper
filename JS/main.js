@@ -131,13 +131,11 @@ try {
         if(nums > 0 && nums <= 1000) {
             var subreddit = document.getElementById('subredditSearch').innerHTML;
 
-            var type = document.querySelector('input[name="searchType"]:checked').value;
+            var type = document.getElementById('searchType').value;
+            var from = document.getElementById('searchTime').value;
+            var nsfw = document.getElementById('nsfwCheck').checked;
 
-
-
-
-
-            var returned = parseThing(subreddit, type, nums);
+            var returned = parseThing(subreddit, type, nums, from, nsfw);
             writeToFile(returned);
         }
 	}

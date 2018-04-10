@@ -52,19 +52,32 @@
 			<form id="searchVals">
 				<div class="wrap">Subreddit: <p id="subredditSearch" class="noToken" disabled>No Subreddit</p></div><br>
 				<div class="wrap">Search Type:
-					<div class="noToken">
-						<input type="radio" name="searchType" value="new" checked />New
-						<input type="radio" name="searchType" value="rising">Rising
-						<input type="radio" name="searchType" value="top">Top</div>
+					<select id="searchType">
+						<option value="top">Top</option>
+						<option value="new">New</option>
+						<option value="rising">Rising</option>
+						<option value="hot">Hot</option>
+						<option value="controversial">Controversial</option>
+					</select>
+				</div><br>
+				<div class="wrap">Links From:
+					<select id="searchTime">
+						<option value="all">All Time</option>
+						<option value="hour">Past Hour</option>
+						<option value="day">Past Day</option>
+						<option value="week">Past Week</option>
+						<option value="month">Past Month</option>
+						<option value="year">Past Year</option>
+					</select>
 				</div><br>
 				<div class="wrap">Number of Posts:<input type="number" class="noToken" name="postsNum" value=100 min=1 max=1000 /></div>
-				<hr class="split">
-				<div	id="lBar"
-						data-preset="stripe"
-						class="ldBar label-center"
-						data-value="0"
-						data-img-size="200,100">
+				<br>
+				<div class="wrap">
+					Include NSFW posts: <input type="checkbox" id="nsfwCheck" checked>
+
 				</div>
+				<hr class="split">
+
 				<hr class="split">
 				<div class="wrap">
 					<button id="backSearch" class="button1">Back</button>
