@@ -89,12 +89,7 @@ function authoriseClick() {
     });
 }
 
-    //TODO: Suss above 100 till 1000
-        //per 100
-        //get AFTER value from json
-        //add AFTER VALUE to base
-        //move WriteToFile outside of for loop to use all num/10 AoAs
-        //see if you can now return and then write the Workbook to file.
+    //TODO:
         //https://loading.io/progress/ check out for fun loading bar
         //each completion of loop add num/1000 to 'loaded val'
 

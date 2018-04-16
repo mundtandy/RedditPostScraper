@@ -60,7 +60,7 @@ function getKey(ws, range){
 }
 
 function parseJSON(jsOBJ, parsedFinal){
-    var index = 0;
+    var index = 1;
     var key = JSON.parse(loadVal('parseKey'));
 
     for(var i = 0; i < jsOBJ.data.dist; i++) {
@@ -116,7 +116,9 @@ try {
         //To actually distribute the file, use one of the techniques outlined in the README. For example, you can use writeFile in node:
        var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
         var newWin = open('url', 'Hello', 'height=300,width=600');
+       // alert(toShow);
         newWin.document.write(toShow);
+        alert(toShow);
        // var wopts = {bookType: 'xlsx', bookSST: false, type: 'array'};
       // \\ X.writeFile(wb, 'test.xlsx');
        // saveAs(new Blob([wbout], {type: "application/octet-stream"}), "test.xlsx");

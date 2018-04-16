@@ -150,3 +150,12 @@ label.secretGetFile input[type="file"] {
 input[type=number]::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 }
+
+#buttonPanel {
+	overflow: hidden;
+}
+
+#resultsPanel {
+	position: relative;
+	overflow: auto;
+}
