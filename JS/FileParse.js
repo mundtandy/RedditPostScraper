@@ -114,11 +114,19 @@ try {
     function writeToFile(toWrite) {
         var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
         //To actually distribute the file, use one of the techniques outlined in the README. For example, you can use writeFile in node:
-       var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
-        var newWin = open('url', 'Hello', 'height=300,width=600');
+       //var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
+        var x =window.open('results.html','_blank','resizable=yes');
+        x.onload = function() {
+            this.document.getElementById('resultsPanel').innerHTML += '<hr>';
+        };
+
+
+
+        //resultswin.document.body.getElementById('resultsPanel').innerHTML += 'Hello';
+        //var newWin = open('results.html');
+
+        //newWin.document.write(toShow);
        // alert(toShow);
-        newWin.document.write(toShow);
-        alert(toShow);
        // var wopts = {bookType: 'xlsx', bookSST: false, type: 'array'};
       // \\ X.writeFile(wb, 'test.xlsx');
        // saveAs(new Blob([wbout], {type: "application/octet-stream"}), "test.xlsx");
