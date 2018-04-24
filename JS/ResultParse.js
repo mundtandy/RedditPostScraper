@@ -2,6 +2,7 @@ var X = XLSX;
 
 var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+
 function handleFile(e) {
     var f = e.target.files[0];
     var reader = new FileReader();
@@ -33,16 +34,13 @@ function getSheet(arr){
         for (var i = 0; i < arr.length; i++) {
             stringtoshow += arr[i];
         }
-
     }
     //TODO add functionality to select sheet
-
     return arr[0];
 }
 
 function getKey(ws, range){
     var key = [];
-
     var header;
     //parse thru columns of sheet
     for(var C=range.s.c; C<= range.e.c; C++) {
@@ -51,11 +49,9 @@ function getKey(ws, range){
             var nextCell = ws[X.utils.encode_cell({r: R, c: C})];
             if( typeof nextCell !== 'undefined' )
                 header = nextCell.w;
-
         }
         key.push(header);
     }
-
     return key;
 }
 
@@ -104,37 +100,18 @@ function parseJSON(jsOBJ, parsedFinal){
             }
         }
         parsedFinal.push(temp);
-
     }
     return parsedFinal;
 }
 
-try {
+function writeToFile(toWrite) {
+    var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
+    var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
 
-    function writeToFile(toWrite) {
-        var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
-        //To actually distribute the file, use one of the techniques outlined in the README. For example, you can use writeFile in node:
-       //var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
-        var x =window.open('results.html','_blank','resizable=yes');
-        x.onload = function() {
-            this.document.getElementById('resultsPanel').innerHTML += '<hr>';
-        };
-
-
-
-        //resultswin.document.body.getElementById('resultsPanel').innerHTML += 'Hello';
-        //var newWin = open('results.html');
-
-        //newWin.document.write(toShow);
-       // alert(toShow);
-       // var wopts = {bookType: 'xlsx', bookSST: false, type: 'array'};
-      // \\ X.writeFile(wb, 'test.xlsx');
-       // saveAs(new Blob([wbout], {type: "application/octet-stream"}), "test.xlsx");
-
-       // alert("At To Write: " + toWrite.length);
-    }
-
-
-} catch(err){
-    alert(err.message);
+    var x = window.open('results.html','_blank','resizable=no, width=800, height=600');
+    x.onload = function() {
+        this.document.getElementById('resultsTable').innerHTML = toShow.slice(toShow.search("<body><table>")+13 , toShow.search('</table></body>'));
+        this.document.getElementById('resultText').innerHTML = localStorage.getItem('resultString');
+        localStorage.removeItem('resultString');
+    };
 }

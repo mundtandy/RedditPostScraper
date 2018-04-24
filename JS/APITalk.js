@@ -89,10 +89,6 @@ function authoriseClick() {
     });
 }
 
-    //TODO:
-        //https://loading.io/progress/ check out for fun loading bar
-        //each completion of loop add num/1000 to 'loaded val'
-
     function parseThing(subreddit, sort, num, from, nsfw) {
         var index = num;
         var toWrite = [];
@@ -108,7 +104,7 @@ function authoriseClick() {
                 +(nsfw ? `&include_over_18=on` : ``)
                 +(after === undefined ? `` : `&after=${after}`);
             var token = loadVal('rAccToken');
-      tokenReq.open('GET', base, false); //false to force NOT ASYNC
+            tokenReq.open('GET', base, false); //false to force NOT ASYNC
 
             tokenReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             tokenReq.setRequestHeader('User-Agent', 'Reddit Post Scraper /u/thealus');
@@ -128,6 +124,7 @@ function authoriseClick() {
 
             index -= 100;
         }
+        localStorage.setItem('resultString', `${subreddit}|${sort}|${num}`);
         return toWrite;
     }
 } catch(err) {

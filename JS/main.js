@@ -155,11 +155,6 @@ try {
 	}
 
 
-	//Heper function to change non-button setText
-	function setButton(ele, text){
-		document.getElementById(ele).innerHTML=text;
-	}
-
 	//Helper Function to set text
 	function setText(ele, toChange, concat){
 		if(concat) {

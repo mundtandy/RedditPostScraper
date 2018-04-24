@@ -17,23 +17,18 @@
         {
             "matches": ["<all_urls>"],
             "js":[
-                "JS/FileSaver.js",
                 "JS/jszip.js",
                 "JS/xlsx.js",
                 "JS/APITalk.js",
-                "JS/FileParse.js",
+                "JS/ResultParse.js",
+                "JS/event.js",
                 "JS/main.js"
 
             ]
         }
     ],
 
-	"background": {
-		"scripts": [
 
-            "JS/event.js"
-        ]
-	},
 
     "permissions":
     [

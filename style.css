@@ -12,8 +12,6 @@ hr.split{
     border-width: 1px;
 }
 
-
-
 h1 {
 	font-size: 14px;
 	color: Black;
@@ -158,4 +156,5 @@ input[type=number]::-webkit-inner-spin-button {
 #resultsPanel {
 	position: relative;
 	overflow: auto;
+	
 }
