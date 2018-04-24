@@ -108,7 +108,7 @@ function writeToFile(toWrite) {
     var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
     var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
 
-    var x = window.open('results.html','_blank','resizable=no, width=800, height=600');
+    var x = window.open('results.html','_blank','width=800, height=600');
     x.onload = function() {
         this.document.getElementById('resultsTable').innerHTML = toShow.slice(toShow.search("<body><table>")+13 , toShow.search('</table></body>'));
         this.document.getElementById('resultText').innerHTML = localStorage.getItem('resultString');

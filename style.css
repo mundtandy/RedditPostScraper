@@ -1,5 +1,5 @@
 *{
-margin: 0;
+	margin: 0;
 }
 
 hr.split{
@@ -29,6 +29,7 @@ body {
 	padding: 0px;
 	font-family: Helvetica,Roboto,Arial,sans-serif;
 	font-size: 13px;
+	overflow: hidden;
 }
 
 .mainPanel {
@@ -36,6 +37,11 @@ body {
 	background-color:white;
 	border: 2px solid rgb(0, 4, 44);
 	border-radius: 4px;
+}
+
+#resultsPage {
+	display: block;
+	overflow: hidden;
 }
 
 #helpDiv {
@@ -73,6 +79,7 @@ body {
 	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.4s;
 }
+
 .button1:hover {
 	background-color: #008CBA;
 	color: white;
@@ -99,16 +106,6 @@ body {
 	text-align: right;
 }
 
-.yesToken{
-	background-color:white;
-	border: 2px solid rgb(243, 4, 44);
-	border-radius: 4px;
-	color: black;
-	padding: 5px 8px;
-	font-size: 12px;
-	font-family: 'Trebuchet MS', Helvetica, sans-serif;
-}
-
 .wrap {
 	display: flex;
 	justify-content: space-between;
@@ -125,7 +122,6 @@ label.secretGetFile input[type="file"] {
     top: -1000px;
 }
 
-/***** Example custom styling *****/
 .secretGetFile {
     background-color:white;
 	border: 2px solid #008CBA;
@@ -154,7 +150,8 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 #resultsPanel {
+	width: 783px;
+	height: 531px;
 	position: relative;
 	overflow: auto;
-	
 }
