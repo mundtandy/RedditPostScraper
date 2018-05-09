@@ -79,6 +79,7 @@ try {
        	document.getElementById("backSearch").addEventListener('click', backSearchClick);
         document.getElementById("parse").addEventListener('click', parse);
 		document.getElementsByClassName('closeBtn')[0].addEventListener('click', closeError);
+		window.addEventListener('click', outsideClick);
 	});
 
     function dropFile() {
@@ -184,6 +185,12 @@ try {
     function closeError() {
     	setText('errorText', '', false);
     	modal.style.display = 'none';
+	}
+
+	function outsideClick(e) {
+    	if(e.target == modal){
+            closeError();
+		}
 	}
 
 } catch(err) {

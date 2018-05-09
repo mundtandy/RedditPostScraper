@@ -2,6 +2,7 @@ var modal = document.getElementById('simpleModal2');
 
 document.getElementById('closeCopyBtn').addEventListener('click', closeError);
 document.getElementById('toClipBoard').addEventListener("click", copyFunc);
+window.addEventListener('click', outsideClick);
 
 function copyFunc() {
     var table = document.getElementById('resultsTable')
@@ -44,4 +45,10 @@ function showError(textVal){
 function closeError() {
     setText('errorText2', '', false);
     modal.style.display = 'none';
+}
+
+function outsideClick(e) {
+    if(e.target == modal){
+        closeError();
+    }
 }
