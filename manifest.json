@@ -1,7 +1,7 @@
 {
 
     "name": "Reddit Post Parser",
-    "version": "0.5",
+    "version": "0.99",
     "manifest_version": 2,
     "description": "This extension facilitates extracting data about a reddit post.",
 

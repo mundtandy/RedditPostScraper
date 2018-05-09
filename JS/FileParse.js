@@ -125,5 +125,5 @@ try {
 
 
 } catch(err){
-    alert(err.message);
+    showError(err.message);
 }

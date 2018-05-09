@@ -16,7 +16,7 @@ try {
 	 */
 
 	var X = XLSX;
-
+	var modal = document.getElementById('simpleModal');
 
 
    	// Check for the various File API support.
@@ -78,7 +78,7 @@ try {
         document.getElementById("enterSearch").addEventListener('click', enterClick);
        	document.getElementById("backSearch").addEventListener('click', backSearchClick);
         document.getElementById("parse").addEventListener('click', parse);
-
+		document.getElementsByClassName('closeBtn')[0].addEventListener('click', closeError);
 	});
 
     function dropFile() {
@@ -106,16 +106,16 @@ try {
 
 	function enterClick() {
 		if(loadVal('parseKey') === null) {
-			alert("Please Import a valid file");
+			showError('Please Import a valid file');
 		} else if(loadVal('rAccToken') === null) {
-			alert("Please get a Token");
+            showError('Please get a Token');
 		} else if(!validTime()) {
-			alert("Token expired, please get a new one.")
+            showError('Token expired, please get a new one.')
 		} else {
             chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
                 var curUrl = (tabs[0].url).toString();
                 if(!curUrl.startsWith('https://www.reddit.com/r/')){
-                	alert("Please navigate to the subreddit you wish to scrape posts from.");
+                    showError('Please navigate to the subreddit you wish to scrape posts from.');
 				} else {
                     var subreddit = curUrl.split("/")[4];
                     setText('subredditSearch', subreddit, false);
@@ -175,9 +175,18 @@ try {
 		document.getElementById(div2).style.display = 'none';
 	}
 
+	//show error text in modal
+    function showError(textVal){
+		setText('errorText', textVal, false);
+        modal.style.display = 'block';
+    }
 
+    function closeError() {
+    	setText('errorText', '', false);
+    	modal.style.display = 'none';
+	}
 
 } catch(err) {
-    alert(err.lineNumber +"\n"+err.message);
+    showError(err.lineNumber +"\n"+err.message);
 }
 

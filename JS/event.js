@@ -1,4 +1,9 @@
-document.getElementById('toClipBoard').addEventListener("click", function() {
+var modal = document.getElementById('simpleModal2');
+
+document.getElementById('closeCopyBtn').addEventListener('click', closeError);
+document.getElementById('toClipBoard').addEventListener("click", copyFunc);
+
+function copyFunc() {
     var table = document.getElementById('resultsTable')
     //alert("clicked");
     var body = document.body, range, sel;
@@ -22,5 +27,21 @@ document.getElementById('toClipBoard').addEventListener("click", function() {
         range.execCommand("Copy");
     }
     sel.removeAllRanges();
-    alert('Results sent to Clipboard');
-});
+    showError('Results sent to Clipboard');
+};
+
+//Helper Function to set text
+function setText(ele, toChange){
+    document.getElementById(ele).innerHTML = toChange;
+}
+
+//show error text in modal
+function showError(textVal){
+    setText('errorText2', textVal);
+    modal.style.display = 'block';
+}
+
+function closeError() {
+    setText('errorText2', '', false);
+    modal.style.display = 'none';
+}

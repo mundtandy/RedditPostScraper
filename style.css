@@ -159,3 +159,38 @@ input[type=number]::-webkit-inner-spin-button {
 	position: relative;
 	overflow: auto;
 }
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content{
+	background-color: #f4f4f4;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	margin: 15% auto;
+	padding: 5%;
+	width: 60%;
+
+	box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+
+.closeBtn {
+	color: #ccc;
+	float: right;
+	font-size: 30px;
+}
+
+.closeBtn:hover,.closeBtn:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}

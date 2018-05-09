@@ -10,7 +10,7 @@ function tokenClick() {
             var curUrl = (tabs[0].url).toString();
             var index = (curUrl).search('&code=');
             if(index == -1)
-                alert('Please re-authorise, and attempt again after being redirected');
+                showError('Please re-authorise, and attempt again after being redirected');
             else {
                 var authCode = curUrl.slice(index+6);
                 //alert(authCode);
@@ -65,10 +65,10 @@ function tokenGet(authCode, newToken) {
                 localStorage.setItem('rRefToken', tokenJSON.refresh_token);
             }
 
-            alert('Token received!');
+            showError('Token received!');
 
         } else{
-            alert("Network error");
+            showError('Network error');
         }
     });
     tokenReq.send(postData);
@@ -121,7 +121,7 @@ function authoriseClick() {
                     after = postsJSON.data.after;
 
                 } else {
-                    alert(tokenReq.status + "\nNetwork error");
+                    showError(tokenReq.status + "\nNetwork error");
                 }
             });
             tokenReq.send();
@@ -132,7 +132,7 @@ function authoriseClick() {
         return toWrite;
     }
 } catch(err) {
-    alert(err.message);
+    showError(err.message);
 }
 
 //removes stored token information
