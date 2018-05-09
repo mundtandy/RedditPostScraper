@@ -89,6 +89,10 @@ function authoriseClick() {
     });
 }
 
+    //TODO:
+        //https://loading.io/progress/ check out for fun loading bar
+        //each completion of loop add num/1000 to 'loaded val'
+
     function parseThing(subreddit, sort, num, from, nsfw) {
         var index = num;
         var toWrite = [];

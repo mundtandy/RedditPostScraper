@@ -2,7 +2,6 @@ var X = XLSX;
 
 var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
-
 function handleFile(e) {
     var f = e.target.files[0];
     var reader = new FileReader();
@@ -34,13 +33,16 @@ function getSheet(arr){
         for (var i = 0; i < arr.length; i++) {
             stringtoshow += arr[i];
         }
+
     }
     //TODO add functionality to select sheet
+
     return arr[0];
 }
 
 function getKey(ws, range){
     var key = [];
+
     var header;
     //parse thru columns of sheet
     for(var C=range.s.c; C<= range.e.c; C++) {
@@ -49,9 +51,11 @@ function getKey(ws, range){
             var nextCell = ws[X.utils.encode_cell({r: R, c: C})];
             if( typeof nextCell !== 'undefined' )
                 header = nextCell.w;
+
         }
         key.push(header);
     }
+
     return key;
 }
 
@@ -100,18 +104,26 @@ function parseJSON(jsOBJ, parsedFinal){
             }
         }
         parsedFinal.push(temp);
+
     }
     return parsedFinal;
 }
 
-function writeToFile(toWrite) {
-    var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
-    var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
+try {
 
-    var x = window.open('results.html','_blank','width=800, height=600');
-    x.onload = function() {
-        this.document.getElementById('resultsTable').innerHTML = toShow.slice(toShow.search("<body><table>")+13 , toShow.search('</table></body>'));
-        this.document.getElementById('resultText').innerHTML = localStorage.getItem('resultString');
-        localStorage.removeItem('resultString');
-    };
+    function writeToFile(toWrite) {
+        var wb = {SheetNames: ["Sheet1"], Sheets: {Sheet1: X.utils.aoa_to_sheet(toWrite)}};
+        var toShow = X.utils.sheet_to_html(wb.Sheets[getSheet(wb.SheetNames)]);
+
+        var x = window.open('results.html','_blank','width=800, height=600');
+        x.onload = function() {
+            this.document.getElementById('resultsTable').innerHTML = toShow.slice(toShow.search("<body><table>")+13 , toShow.search('</table></body>'));
+            this.document.getElementById('resultText').innerHTML = localStorage.getItem('resultString');
+            localStorage.removeItem('resultString');
+        };
+    }
+
+
+} catch(err){
+    alert(err.message);
 }

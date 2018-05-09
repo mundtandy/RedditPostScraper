@@ -20,15 +20,12 @@
                 "JS/jszip.js",
                 "JS/xlsx.js",
                 "JS/APITalk.js",
-                "JS/ResultParse.js",
-                "JS/event.js",
+                "JS/FileParse.js",
                 "JS/main.js"
 
             ]
         }
     ],
-
-
 
     "permissions":
     [

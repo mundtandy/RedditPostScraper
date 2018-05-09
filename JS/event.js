@@ -1,9 +1,9 @@
 document.getElementById('toClipBoard').addEventListener("click", function() {
     var table = document.getElementById('resultsTable')
-	//alert("clicked");
-	var body = document.body, range, sel;
+    //alert("clicked");
+    var body = document.body, range, sel;
     if (document.createRange && window.getSelection) {
-    	range = document.createRange();
+        range = document.createRange();
         sel = window.getSelection();
         sel.removeAllRanges();
         try {
@@ -16,7 +16,7 @@ document.getElementById('toClipBoard').addEventListener("click", function() {
         document.execCommand("copy");
 
     } else if (body.createTextRange) {
-    	range = body.createTextRange();
+        range = body.createTextRange();
         range.moveToElementText(table);
         range.select();
         range.execCommand("Copy");
