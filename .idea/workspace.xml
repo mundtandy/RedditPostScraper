@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5da276aa-a536-489f-ba49-8d66e416514a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GPH_top-posts.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data-collection_Dec2014.xlsx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JS/event.js" afterPath="$PROJECT_DIR$/JS/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JS/main.js" afterPath="$PROJECT_DIR$/JS/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JS/APITalk.js" afterPath="$PROJECT_DIR$/JS/APITalk.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JS/FileParse.js" afterPath="$PROJECT_DIR$/JS/FileParse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,18 +24,18 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JS/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="81" column="55" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="55" />
+            <state relative-caret-position="170">
+              <caret line="81" column="55" lean-forward="false" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileParse.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FileParse.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JS/FileParse.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2159">
-              <caret line="127" column="13" lean-forward="false" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+            <state relative-caret-position="277">
+              <caret line="72" column="43" lean-forward="false" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -41,8 +44,8 @@
       <file leaf-file-name="APITalk.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JS/APITalk.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+            <state relative-caret-position="816">
+              <caret line="120" column="57" lean-forward="false" selection-start-line="120" selection-start-column="57" selection-end-line="120" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -51,18 +54,18 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
+            <state relative-caret-position="2550">
               <caret line="150" column="29" lean-forward="false" selection-start-line="150" selection-start-column="29" selection-end-line="150" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="event.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="event.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JS/event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
+            <state relative-caret-position="867">
+              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding>
                 <marker date="1525841218361" expanded="true" signature="845:981" ph="{...}" />
               </folding>
@@ -86,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/results.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="10" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+              <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
               <folding>
                 <element signature="e#271#278#1" expanded="true" />
               </folding>
@@ -127,12 +130,12 @@
         <option value="$PROJECT_DIR$/JS/Tokens.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/mypopup.html" />
-        <option value="$PROJECT_DIR$/JS/FileParse.js" />
-        <option value="$PROJECT_DIR$/JS/APITalk.js" />
         <option value="$PROJECT_DIR$/results.html" />
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/JS/main.js" />
         <option value="$PROJECT_DIR$/JS/event.js" />
+        <option value="$PROJECT_DIR$/JS/APITalk.js" />
+        <option value="$PROJECT_DIR$/JS/FileParse.js" />
       </list>
     </option>
   </component>
@@ -173,8 +176,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,12 +270,13 @@
       <workItem from="1523922186290" duration="820000" />
       <workItem from="1524443974283" duration="3424000" />
       <workItem from="1525830200010" duration="686000" />
-      <workItem from="1525841122997" duration="100000" />
+      <workItem from="1525841122997" duration="250000" />
+      <workItem from="1525940787329" duration="383000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94303000" />
+    <option name="totallyTimeSpent" value="94836000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="75" width="1379" height="1407" extended-state="0" />
@@ -281,12 +285,12 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18488628" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34621328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34621328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -549,9 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45169">
           <caret line="2670" column="19" lean-forward="false" selection-start-line="2670" selection-start-column="14" selection-end-line="2670" selection-end-column="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -563,34 +564,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JS/FileParse.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="127" column="13" lean-forward="false" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JS/APITalk.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
+        <state relative-caret-position="2550">
           <caret line="150" column="29" lean-forward="false" selection-start-line="150" selection-start-column="29" selection-end-line="150" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JS/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="81" column="55" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -598,7 +575,7 @@
     <entry file="file://$PROJECT_DIR$/results.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="22" column="10" lean-forward="true" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+          <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
           <folding>
             <element signature="e#271#278#1" expanded="true" />
           </folding>
@@ -617,11 +594,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JS/event.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="47" lean-forward="false" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
+        <state relative-caret-position="867">
+          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding>
             <marker date="1525841218361" expanded="true" signature="845:981" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JS/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="81" column="55" lean-forward="false" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JS/APITalk.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="120" column="57" lean-forward="false" selection-start-line="120" selection-start-column="57" selection-end-line="120" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JS/FileParse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="72" column="43" lean-forward="false" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

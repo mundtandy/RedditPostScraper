@@ -59,7 +59,7 @@ function getKey(ws, range){
     return key;
 }
 
-function parseJSON(jsOBJ, parsedFinal){
+function parseJSON(jsOBJ, parsedFinal, num){
     var index = 1;
     var key = JSON.parse(loadVal('parseKey'));
 
@@ -70,7 +70,7 @@ function parseJSON(jsOBJ, parsedFinal){
         for (var j = 0; j <key.length; j++) {
             switch(key[j]){
                 case '#':
-                    temp.push(index++);
+                    temp.push(num+(index++));
                     break;
                 case 'Day':
                     temp.push(days[timeUTC.getDay()]);

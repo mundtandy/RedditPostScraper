@@ -97,6 +97,7 @@ function authoriseClick() {
         var index = num;
         var toWrite = [];
         var after;
+        var hundred = 0;
 
         while(index > 0) {
 
@@ -117,7 +118,7 @@ function authoriseClick() {
             tokenReq.addEventListener('load', function () {
                 if (tokenReq.status >= 200 && tokenReq.status < 400) {
                     var postsJSON = JSON.parse(tokenReq.responseText);
-                    parseJSON(postsJSON, toWrite);
+                    parseJSON(postsJSON, toWrite, hundred);
                     after = postsJSON.data.after;
 
                 } else {
@@ -127,6 +128,7 @@ function authoriseClick() {
             tokenReq.send();
 
             index -= 100;
+            hundred += 100;
         }
         localStorage.setItem('resultString', `${subreddit}|${sort}|${num}`);
         return toWrite;
