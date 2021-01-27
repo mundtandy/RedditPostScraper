@@ -1,23 +1,38 @@
 {
 
     "name": "Reddit Post Parser",
-    "version": "0.5",
+    "version": "1.01",
     "manifest_version": 2,
     "description": "This extension facilitates extracting data about a reddit post.",
 
 
-	"background": {
-        "scripts": 
-        [
-            "event.js",
-            "jquery-3.2.1.min.js"
-        ]
-	},
+    "browser_action":
+    {
+        "default_icon": "icon.png",
+        "default_popup": "mypopup.html"
+    },
+
+    "content_scripts":
+    [
+        {
+            "matches": ["<all_urls>"],
+            "js":[
+                "JS/jszip.js",
+                "JS/xlsx.js",
+                "JS/APITalk.js",
+                "JS/FileParse.js",
+                "JS/main.js"
+
+            ]
+        }
+    ],
 
     "permissions":
     [
+        "downloads",
         "tabs",
-        "contextMenus",
-        "http://www.reddit.com/*"
+        "storage",
+        "contextMenus"
+
     ]
 }

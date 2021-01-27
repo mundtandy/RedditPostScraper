@@ -2,7 +2,7 @@
 margin: 0;
 }
 
-hr { 
+hr.split{
     display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -16,8 +16,10 @@ hr {
 
 h1 {
 	font-size: 14px;
-	color: white;
+	color: Black;
 	text-align: center;
+
+	font-family: Century Gothic, sans-serif;
 }
 
 p {
@@ -31,8 +33,11 @@ body {
 	font-size: 13px;
 }
 
-#popupContainerDiv {
-	min-width: 190px;
+.mainPanel {
+	min-width: 350px;
+	background-color:white;
+	border: 2px solid rgb(0, 4, 44);
+	border-radius: 4px;
 }
 
 #helpDiv {
@@ -56,6 +61,27 @@ body {
     transition-duration: 0.4s;
 }
 
+.button1 {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:white;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 20px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+}
+.button1:hover {
+	background-color: #008CBA;
+	color: white;
+	border: 2px solid #000000;
+	border-radius: 4px;
+}
+
 .button:hover {
     background-color: #008CBA;
     color: white;
@@ -71,6 +97,8 @@ body {
 	padding: 5px 8px;
 	font-size: 12px;
 	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	display: inline;
+	text-align: right;
 }
 
 .yesToken{
@@ -86,5 +114,83 @@ body {
 .wrap {
 	display: flex;
 	justify-content: space-between;
+}
 
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+label.secretGetFile input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+/***** Example custom styling *****/
+.secretGetFile {
+    background-color:white;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	color: black;
+	padding: 5px 8px;
+	font-size: 12px;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.secretGetFile:hover {
+    background-color: #008CBA;
+    color: white;
+	border: 2px solid #000000;
+	border-radius: 4px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+#buttonPanel {
+	overflow: hidden;
+}
+
+#resultsPanel {
+	position: relative;
+	overflow: auto;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content{
+	background-color: #f4f4f4;
+	border: 2px solid #008CBA;
+	border-radius: 4px;
+	margin: 15% auto;
+	padding: 5%;
+	width: 60%;
+
+	box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+}
+
+.closeBtn {
+	color: #ccc;
+	float: right;
+	font-size: 30px;
+}
+
+.closeBtn:hover,.closeBtn:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
 }

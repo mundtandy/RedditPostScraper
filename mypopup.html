@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+
+	</head>
+	<body>
+		<div id="simpleModal" class="modal">
+			<div class="modal-content">
+				<span class="closeBtn">&times;</span>
+				<p id="errorText"/>
+			</div>
+		</div>
+		<!--Main Panel-->
+		<div id="popupContainerDiv" class="mainPanel">
+			<div class="popupBorder">
+				<h1>Reddit Post Parser</h1>
+			</div>
+			<hr>
+			<!--Panel 1-->
+			<div id="authenticate" class="wrap">
+				<button id="authorise" class="button">Authorise</button>
+				<button id="help" class="button">Help</button>
+			</div>
+			<!--Panel 2-->
+			<hr class="split">
+			<div id="getToken" class="wrap">
+				<button id="token" class="button">Get Token</button>
+				<p id="currentToken" class="noToken" disabled>No token</p>
+			</div>
+			<hr class="split">
+				<!--Panel 3-->
+			<div id="getFile" class="wrap">
+				<label class="secretGetFile">
+					<input id="fileSelect" type="file" accept=".xls,.xlsx" required/>
+					<span>Import File</span>
+				</label>
+
+			</div>
+			<div id="haveFile" class="wrap" style="display: none">
+				<button id="changeFile" class="button">Change File</button>
+				<p id="currentFile" class="noToken" disabled>No File</p>
+			</div>
+			<hr class="split">
+				<!--Panel 4-->
+			<div id="parseReddit" class="wrap">
+				<button id="enterSearch" class="button1">Enter Search Details</button>
+			</div>
+		</div>
+
+		<!--Search Panel-->
+
+		<div id="searchOptions" class="mainPanel" style="display: none" >
+			<div class="popupBorder">
+				<h1>Reddit Post Parser</h1>
+			</div>
+			<hr>
+			<form id="searchVals">
+				<div class="wrap">Subreddit: <p id="subredditSearch" class="noToken" disabled>No Subreddit</p></div><br>
+				<div class="wrap">Search Type:
+					<select id="searchType">
+						<option value="top">Top</option>
+						<option value="new">New</option>
+						<option value="rising">Rising</option>
+						<option value="hot">Hot</option>
+						<option value="controversial">Controversial</option>
+					</select>
+				</div><br>
+				<div class="wrap">Links From:
+					<select id="searchTime">
+						<option value="all">All Time</option>
+						<option value="hour">Past Hour</option>
+						<option value="day">Past Day</option>
+						<option value="week">Past Week</option>
+						<option value="month">Past Month</option>
+						<option value="year">Past Year</option>
+					</select>
+				</div><br>
+				<div class="wrap">Number of Posts:<input type="number" class="noToken" name="postsNum" value=100 min=1 max=1000 /></div>
+				<br>
+				<div class="wrap">
+					Include NSFW posts: <input type="checkbox" id="nsfwCheck" checked>
+
+				</div>
+				<hr class="split">
+
+				<hr class="split">
+				<div class="wrap">
+					<button id="backSearch" class="button1">Back</button>
+					<button id="parse" class="button1">Scrape Posts</button></div>
+			</form>
+		</div>
+
+		<!--Help Panel-->
+		<div id="helpDiv" style="display: none">
+			<div class="popupBorder">
+				<h1>Reddit Post Parser</h1>
+			</div>
+			<div class="wrap">
+				<p>Help.</p><button id="back" class="button">Back</button>
+			</div>
+			<hr>
+			<p>Using the Reddit API requires 2 stages of validation.</p>
+			<p>First you will need to authenticate. This simply lets Reddit know you will be using your account to access the API.
+				In most cases you should only need to do this once ever.</p>
+			<p>Every time you want to access the API, you will need to have an Token. A token lasts for 1 hour and you will need to
+				apply for a new one for every hour you want to use the API.</p>
+			<p>The very first time you use this extension, you will need to first Authenticate. This will open a new window. Simply select 'agree'.
+				This will then redirect you to reddit. From this page, select Token. The URL of this reddit page contains information
+				that needs to be collected in order to get your first token.
+				Any subsequent time you want to use this extension. You should simply only need to get a token. The only likely
+				situations where you will need to re-authenticate is if you are using a new computer, or you deleted Chrome/wiped any cache.</p>
+
+
+			<div class="popupBorder">&nbsp;</div>
+		</div>
+		<script type="text/javascript" src="JS/jszip.js"></script>
+		<script type="text/javascript" src="JS/xlsx.js"></script>
+		<script type="text/javascript" src="JS/APITalk.js"></script>
+		<script type="text/javascript" src="JS/FileParse.js"></script>
+ 		<script type="text/javascript" src="JS/main.js"></script>
+
+	</body>
+</html>
